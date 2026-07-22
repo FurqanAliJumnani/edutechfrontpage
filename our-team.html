@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Edutech Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .team-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 36px; text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .team-avatar {
+            width: 100px; height: 100px; margin: 0 auto 20px;
+            background: var(--gradient-1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--white);
+        }
+        .team-avatar.gold { background: linear-gradient(135deg, #eab308, #facc15); }
+        .team-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .team-card .role { color: var(--primary-light); font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; display: block; }
+        .team-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.7; }
+        .team-social { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+        .team-social a {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: rgba(26,86,219,0.08); display: flex;
+            align-items: center; justify-content: center;
+            color: var(--primary); text-decoration: none; transition: all 0.3s ease; font-size: 0.85rem;
+        }
+        .team-social a:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
+        .support-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 32px; text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .support-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .support-avatar {
+            width: 80px; height: 80px; margin: 0 auto 16px;
+            background: var(--gradient-3); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--white);
+        }
+        .support-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .support-card .role { color: var(--accent); font-size: 0.82rem; font-weight: 600; margin-bottom: 10px; display: block; }
+        .support-card p { color: var(--gray); font-size: 0.85rem; line-height: 1.7; }
+        .tagline-box {
+            background: var(--light); border-radius: var(--radius); padding: 48px 40px;
+            text-align: center; margin-bottom: 60px; border-left: 4px solid var(--primary);
+        }
+        .tagline-box h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem;
+            font-weight: 800; color: var(--primary); margin-bottom: 16px; line-height: 1.4;
+        }
+        .tagline-box p { color: var(--gray); font-size: 0.95rem; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+        .cta-section {
+            background: var(--gradient-2); border-radius: 24px; padding: 72px 60px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); border-radius: 50%;
+        }
+        .cta-section .inner { position: relative; z-index: 2; }
+        .cta-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); margin-bottom: 16px; }
+        .cta-section p { color: var(--gray-light); font-size: 1.05rem; max-width: 550px; margin: 0 auto 36px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Our Team
+            </div>
+            <h1>Meet <span class="highlight">Our Team</span></h1>
+            <p>Driven by Passion. United by Purpose. Powered by Innovation.</p>
+        </div>
+    </section>
+
+    <!-- Team Introduction -->
+    <section>
+        <div class="container">
+            <div class="tagline-box reveal">
+                <h2>Driven by Passion. United by Purpose. Powered by Innovation.</h2>
+                <p>At EduTech Solutions, our team is the heartbeat of our mission. We are a dynamic group of educators, trainers, curriculum designers, software developers, and education strategists united by the common goal of transforming education across Pakistan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section style="padding-top:0;">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-crown"></i> Leadership</div>
+                <h2>Leadership Team</h2>
+                <p>Guided by visionaries who are committed to reshaping the educational landscape of Pakistan.</p>
+            </div>
+            <div class="card-grid card-grid-4 reveal">
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+                    <h3>Agha Zahid</h3>
+                    <span class="role">Founder</span>
+                    <p>The vision of EduTech Solutions was conceived, created, and brought to life by Agha Zahid, an educationist with over 28 years of rich experience in teaching, teacher training, and academic innovation. Agha Zahid is renowned for his mastery in pedagogical skills, his ability to design learner-centered approaches, and his passion for transforming traditional education through innovative methodologies and technology integration.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar gold"><i class="fas fa-user-tie"></i></div>
+                    <h3>Hina Zahid</h3>
+                    <span class="role">Project Director & School Leadership Expert</span>
+                    <p>Hina Zahid is a passionate school leader with 20+ years of experience, known for her strategic leadership, curriculum expertise, and commitment to academic excellence. She excels at building strong school cultures, mentoring teachers, and driving student success through innovation and disciplined management.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-microchip"></i></div>
+                    <h3>Engr. Furqan Ali</h3>
+                    <span class="role">IT Expert & Team Head</span>
+                    <p>Furqan Ali, IT Expert and Team Head at EduTech's Tech Zone, leads the development of digital solutions that power our school systems. With deep expertise in educational technology, he ensures smooth integration of e-learning platforms, portals, and management systems.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar gold"><i class="fas fa-code"></i></div>
+                    <h3>Engr. Uzair Rajper</h3>
+                    <span class="role">IT Software Developer</span>
+                    <p>Uzair Rajper is a skilled software developer at EduTech Solutions, driving the creation of smart, scalable, and user-friendly educational platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Team -->
+    <section style="background:var(--light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-heart"></i> Support</div>
+                <h2>Support Team</h2>
+                <p>The dedicated professionals who power our operations and ensure excellence across every project.</p>
+            </div>
+            <div class="card-grid card-grid-4 reveal">
+                <div class="support-card">
+                    <div class="support-avatar"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Mudasir Arbani</h3>
+                    <span class="role">Admin Head & Management Lead</span>
+                    <p>Serves as the Admin Head and Management Lead at EduTech Solutions, overseeing operations, logistics, and administration.</p>
+                </div>
+                <div class="support-card">
+                    <div class="support-avatar"><i class="fas fa-futbol"></i></div>
+                    <h3>Agha Shahid</h3>
+                    <span class="role">Sports & Co-Curricular Head</span>
+                    <p>Leads the Sports and Co-Curricular Programs at EduTech Solutions with passion and a belief in holistic education.</p>
+                </div>
+                <div class="support-card">
+                    <div class="support-avatar"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Shayan Rajper</h3>
+                    <span class="role">Master Graphic Designer</span>
+                    <p>Is the creative force behind EduTech's visual identity.</p>
+                </div>
+                <div class="support-card">
+                    <div class="support-avatar"><i class="fas fa-tools"></i></div>
+                    <h3>Imran Memon</h3>
+                    <span class="role">Technical Support & Graphic Design Associate</span>
+                    <p>Plays a key role at EduTech Solutions, combining technical support with graphic design expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Our Team CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-section reveal">
+                <div class="inner">
+                    <h2>Join Our Team</h2>
+                    <p>We are always looking for talented individuals who share our passion for education and innovation. Explore exciting career opportunities with us and be part of the transformation.</p>
+                    <a href="career.html" class="btn btn-accent">
+                        View Open Positions <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="our-team.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Our Team</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Programs</a></li>
+                        <li><a href="our-partners.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Partners</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> ECE Certification</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> School Improvement</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> SNC Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digitalization</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

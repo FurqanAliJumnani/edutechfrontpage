@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - EduTech Solutions Pakistan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .why-us-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+        .why-card { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius); padding: 36px; text-align: center; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); transform: scaleX(0); transition: transform 0.4s ease; }
+        .why-card:hover::before { transform: scaleX(1); }
+        .why-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: transparent; }
+        .why-card-icon { width: 72px; height: 72px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 24px; transition: all 0.3s ease; }
+        .why-card:hover .why-card-icon { transform: scale(1.1); }
+        .why-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+        .why-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+        .jobs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .job-card { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius); padding: 32px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; display: flex; flex-direction: column; }
+        .job-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .job-card-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+        .job-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+        .job-card-title h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .job-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .job-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--light); padding: 6px 14px; border-radius: 50px; font-size: 0.78rem; font-weight: 500; color: var(--gray); }
+        .job-tag i { font-size: 0.7rem; }
+        .job-card .btn { margin-top: auto; text-align: center; justify-content: center; padding: 12px 24px; font-size: 0.88rem; }
+
+        .culture-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .culture-content h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+        .culture-content > div > p { color: var(--gray-light); font-size: 1rem; line-height: 1.8; margin-bottom: 32px; }
+        .culture-features { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .culture-features li { display: flex; align-items: flex-start; gap: 14px; font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.7; }
+        .culture-features li i { color: var(--accent-light); font-size: 1rem; margin-top: 4px; flex-shrink: 0; }
+        .culture-visual { position: relative; display: flex; justify-content: center; }
+        .culture-visual-box { width: 100%; max-width: 420px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px; backdrop-filter: blur(10px); text-align: center; }
+        .culture-visual-box .big-icon { width: 80px; height: 80px; background: rgba(234,179,8,0.15); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent-light); margin: 0 auto 24px; }
+        .culture-visual-box h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: var(--white); margin-bottom: 8px; }
+        .culture-visual-box p { color: var(--gray-light); font-size: 0.9rem; }
+        .culture-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+        .culture-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 20px; text-align: center; }
+        .culture-stat h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--accent-light); margin-bottom: 4px; }
+        .culture-stat p { font-size: 0.78rem; color: var(--gray-light); }
+
+        .apply-section { background: var(--light); }
+        .apply-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: flex-start; }
+        .apply-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        .apply-info > p { color: var(--gray); margin-bottom: 32px; line-height: 1.7; }
+        .apply-steps { display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px; }
+        .apply-step { display: flex; align-items: flex-start; gap: 16px; }
+        .apply-step-num { width: 40px; height: 40px; background: var(--gradient-1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .apply-step-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .apply-step-text p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+        .apply-form-card { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-sm); }
+        .apply-form-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 28px; }
+        .file-upload { position: relative; display: block; }
+        .file-upload input[type="file"] { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; }
+        .file-upload-label { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 20px; border: 2px dashed rgba(0,0,0,0.12); border-radius: var(--radius-sm); background: var(--light); font-size: 0.88rem; color: var(--gray); transition: all 0.3s ease; cursor: pointer; }
+        .file-upload-label:hover { border-color: var(--primary-light); background: rgba(37,99,235,0.04); }
+        .file-upload-label i { font-size: 1.1rem; color: var(--primary-light); }
+
+        .success-message { display: none; text-align: center; padding: 60px 40px; }
+        .success-message .success-icon { width: 100px; height: 100px; background: rgba(34,197,94,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; }
+        .success-message .success-icon i { font-size: 2.5rem; color: #22c55e; }
+        .success-message h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+        .success-message p { color: var(--gray); font-size: 1rem; margin-bottom: 32px; line-height: 1.7; }
+
+        @media (max-width: 1024px) {
+            .why-us-grid { grid-template-columns: repeat(2, 1fr); }
+            .jobs-grid { grid-template-columns: repeat(2, 1fr); }
+            .culture-content { grid-template-columns: 1fr; gap: 40px; }
+            .apply-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .why-us-grid { grid-template-columns: 1fr; }
+            .jobs-grid { grid-template-columns: 1fr; }
+            .culture-visual { order: -1; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">EduTech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Careers
+            </div>
+            <h1>Join Our <span class="highlight">Team</span></h1>
+            <p>EduTech is always looking for talented educators, developers, and professionals. Apply now and become part of a growing educational ecosystem.</p>
+        </div>
+    </section>
+
+    <!-- Why Work With Us -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-heart"></i> Why Work With Us</div>
+                <h2>Build Your Career at EduTech</h2>
+                <p>We offer an environment where talent thrives and ambition meets opportunity.</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-card reveal">
+                    <div class="why-card-icon ci-blue"><i class="fas fa-chart-line"></i></div>
+                    <h3>Growth Opportunities</h3>
+                    <p>Career advancement and professional development through structured mentorship and clear promotion paths.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon ci-yellow"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Innovative Culture</h3>
+                    <p>Work in a creative and technology-driven environment shaping the future of education.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon ci-blue-light"><i class="fas fa-gift"></i></div>
+                    <h3>Competitive Benefits</h3>
+                    <p>Attractive salary packages and benefits including health coverage, paid leave, and bonuses.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-card-icon ci-yellow"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Work-Life Balance</h3>
+                    <p>Flexible working hours and a supportive environment that respects your personal time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section style="background: var(--light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-briefcase"></i> Open Positions</div>
+                <h2>Find Your Perfect Role</h2>
+                <p>We're growing fast and looking for talented people to join our mission.</p>
+            </div>
+            <div class="jobs-grid">
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-blue"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="job-card-title">
+                            <h3>Lecturer / Instructor</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Education Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-yellow"><i class="fas fa-code"></i></div>
+                        <div class="job-card-title">
+                            <h3>Software Developer</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Technology Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-blue-light"><i class="fas fa-palette"></i></div>
+                        <div class="job-card-title">
+                            <h3>UI/UX Designer</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Design Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-yellow"><i class="fas fa-pen-fancy"></i></div>
+                        <div class="job-card-title">
+                            <h3>Content Writer</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Content Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-blue"><i class="fas fa-tasks"></i></div>
+                        <div class="job-card-title">
+                            <h3>Administration Staff</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Operations Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="job-card reveal">
+                    <div class="job-card-header">
+                        <div class="job-card-icon ci-yellow"><i class="fas fa-bullhorn"></i></div>
+                        <div class="job-card-title">
+                            <h3>Media And Digital Marketing</h3>
+                        </div>
+                    </div>
+                    <div class="job-meta">
+                        <span class="job-tag"><i class="fas fa-building"></i> Marketing Department</span>
+                        <span class="job-tag"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-tag"><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Culture -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="culture-content">
+                <div class="reveal">
+                    <div class="section-tag"><i class="fas fa-users"></i> Our Culture</div>
+                    <h3>Where Passion Meets Purpose</h3>
+                    <p>At EduTech, we believe that great products are built by great teams. Our culture is designed to inspire creativity, encourage collaboration, and empower every individual to do their best work.</p>
+                    <ul class="culture-features">
+                        <li><i class="fas fa-check-circle"></i> <div><strong>Collaborative Environment</strong> - Work alongside talented colleagues in a supportive, team-first atmosphere where every voice matters.</div></li>
+                        <li><i class="fas fa-check-circle"></i> <div><strong>Continuous Learning</strong> - Access to workshops, online courses, conferences, and regular skill development sessions to keep you ahead.</div></li>
+                        <li><i class="fas fa-check-circle"></i> <div><strong>Innovation-Driven</strong> - We encourage experimentation and creative problem-solving. Your best ideas will find a home here.</div></li>
+                        <li><i class="fas fa-check-circle"></i> <div><strong>Employee First</strong> - We invest in our people because we know that happy teams build exceptional products.</div></li>
+                    </ul>
+                </div>
+                <div class="culture-visual reveal">
+                    <div class="culture-visual-box">
+                        <div class="big-icon"><i class="fas fa-rocket"></i></div>
+                        <h4>Grow With Us</h4>
+                        <p>Join a team that's redefining education technology in Pakistan.</p>
+                        <div class="culture-stats">
+                            <div class="culture-stat">
+                                <h4>50+</h4>
+                                <p>Team Members</p>
+                            </div>
+                            <div class="culture-stat">
+                                <h4>4.8</h4>
+                                <p>Glassdoor Rating</p>
+                            </div>
+                            <div class="culture-stat">
+                                <h4>92%</h4>
+                                <p>Retention Rate</p>
+                            </div>
+                            <div class="culture-stat">
+                                <h4>25+</h4>
+                                <p>Open Positions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Application Form -->
+    <section class="apply-section" id="apply">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-paper-plane"></i> Apply Now</div>
+                <h2>Ready to Join Our Team?</h2>
+                <p>Fill out the form below and take the first step toward an exciting career.</p>
+            </div>
+            <div class="apply-grid">
+                <div class="apply-info reveal">
+                    <h3>How to Apply</h3>
+                    <p>Follow these simple steps to submit your application and start your journey with EduTech.</p>
+                    <div class="apply-steps">
+                        <div class="apply-step">
+                            <div class="apply-step-num">1</div>
+                            <div class="apply-step-text">
+                                <h4>Choose Your Role</h4>
+                                <p>Browse our open positions and find the role that matches your skills and passion.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">2</div>
+                            <div class="apply-step-text">
+                                <h4>Submit Your Application</h4>
+                                <p>Fill out the application form with your details, experience, and upload your resume.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">3</div>
+                            <div class="apply-step-text">
+                                <h4>Interview Process</h4>
+                                <p>Our HR team will review your application and schedule an interview if you're a good fit.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">4</div>
+                            <div class="apply-step-text">
+                                <h4>Welcome Aboard</h4>
+                                <p>Once selected, you'll be onboarded and introduced to the team. Let's build the future!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="text">
+                            <h4>Send Your Resume Directly</h4>
+                            <p>careers@edutechsolutionspk.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="apply-form-card reveal" id="applicationFormCard">
+                        <h3>Application Form</h3>
+                        <form id="applicationForm">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" placeholder="you@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="tel" placeholder="+92 3XX XXXXXXX" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Position Applied For *</label>
+                                    <select required>
+                                        <option value="">Select a position</option>
+                                        <option>Lecturer / Instructor</option>
+                                        <option>Software Developer</option>
+                                        <option>UI/UX Designer</option>
+                                        <option>Content Writer</option>
+                                        <option>Administration Staff</option>
+                                        <option>Media And Digital Marketing</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Experience in Years *</label>
+                                    <input type="number" placeholder="e.g. 3" min="0" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload CV (PDF Only) *</label>
+                                <div class="file-upload">
+                                    <input type="file" accept=".pdf" required>
+                                    <div class="file-upload-label">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <span>Drop your CV here or click to browse (PDF only)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Why should we hire you? *</label>
+                                <textarea placeholder="Tell us about your skills, experience, and why you'd be a great fit for this role..." rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                Apply Now <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="apply-form-card success-message" id="successMessage">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Application Submitted</h3>
+                        <p>Thank you for applying at EduTech. Our HR team will contact you soon.</p>
+                        <a href="index.html" class="btn btn-primary">Back to Home <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Projects</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Edutech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionspk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 EduTech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Job card Apply Now links scroll to form
+        document.querySelectorAll('.job-card .btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form submission with success message
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('applicationFormCard').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

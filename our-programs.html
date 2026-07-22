@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Programs - Edutech Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .program-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 36px 32px; position: relative; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .program-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient-1); transform: scaleX(0); transition: transform 0.4s ease;
+        }
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .program-card .icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-bottom: 20px;
+        }
+        .program-card h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem;
+            font-weight: 700; color: var(--dark); margin-bottom: 12px;
+        }
+        .program-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.75; }
+        .cta-section {
+            background: var(--gradient-2); border-radius: 24px; padding: 72px 60px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); border-radius: 50%;
+        }
+        .cta-section .inner { position: relative; z-index: 2; }
+        .cta-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--white); margin-bottom: 16px; }
+        .cta-section p { color: var(--gray-light); font-size: 1.05rem; max-width: 550px; margin: 0 auto 36px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Our Programs
+            </div>
+            <h1>Our <span class="highlight">Programs</span></h1>
+            <p>Comprehensive educational programs designed to empower schools, educators, and students for a brighter future.</p>
+        </div>
+    </section>
+
+    <!-- All Programs -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-graduation-cap"></i> Programs</div>
+                <h2>Our Programs</h2>
+                <p>End-to-end educational solutions covering teacher training, school management, curriculum development, and technology integration.</p>
+            </div>
+            <div class="card-grid card-grid-2 reveal">
+                <div class="program-card">
+                    <div class="icon ci-yellow"><i class="fas fa-child"></i></div>
+                    <h3>Early Childhood Education (ECE) Certification Program</h3>
+                    <p>A comprehensive certification program designed for Montessori and ECE educators. It focuses on child development, interactive learning environments, and activity-based teaching aligned with modern educational standards. The program includes hands-on training, lesson planning, and assessment strategies to build a strong foundation in early years education.</p>
+                </div>
+                <div class="program-card">
+                    <div class="icon ci-blue"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Teachers' Training & Professional Development Program</h3>
+                    <p>This program offers capacity-building workshops and continuous professional development sessions for educators across all levels. Topics include: Innovative and digital teaching methodologies, Classroom management and student engagement, Subject-specific enhancement (Math, Science, English, etc.), STEM and project-based learning.</p>
+                </div>
+                <div class="program-card">
+                    <div class="icon ci-blue-light"><i class="fas fa-school"></i></div>
+                    <h3>School Improvement Plan (SIP)</h3>
+                    <p>Our flagship program designed to uplift schools through a complete academic and operational transformation. SIP includes: Teacher training and monitoring, E-learning lab setup, Student learning portal access, Creative worksheets, EduTech publications, and more, Multi-campus academic support and school management software.</p>
+                </div>
+                <div class="program-card">
+                    <div class="icon ci-yellow"><i class="fas fa-file-alt"></i></div>
+                    <h3>Student Assessment & Test Generation Program</h3>
+                    <p>A systemized program for academic performance measurement through: Customized exam paper generation (monthly, term-wise), Diagnostic, formative, and summative assessments, Progress tracking tools and student performance reports, Support for online and offline test formats.</p>
+                </div>
+                <div class="program-card">
+                    <div class="icon ci-blue"><i class="fas fa-book-open"></i></div>
+                    <h3>Single National Curriculum (SNC) Training & Publication</h3>
+                    <p>EduTech offers comprehensive teacher orientation and training on the Single National Curriculum (SNC), including: SNC-based content delivery techniques, Integration of moral, civic, and modern learning values, Custom SNC-aligned textbooks, workbooks, and guides developed by EduTech's publication wing.</p>
+                </div>
+                <div class="program-card">
+                    <div class="icon ci-blue-light"><i class="fas fa-tablet-alt"></i></div>
+                    <h3>Sindh Textbook Board Upgradation & Digitalization Program</h3>
+                    <p>An exclusive initiative to upgrade and digitize the Sindh Textbook Board content through: Interactive and digital textbook versions, Visual lesson enhancements and video lectures, Digital worksheets, quizzes, and teacher guides, Support for hybrid learning in both English and Urdu mediums.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Categories (Dark) -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-layer-group"></i> Why Choose Us</div>
+                <h2>Why EduTech Programs</h2>
+                <p>Our programs are built on decades of experience and designed for real-world impact.</p>
+            </div>
+            <div class="card-grid card-grid-3 reveal">
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:40px 32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:72px;height:72px;margin:0 auto 22px;background:rgba(234,179,8,0.12);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent-light);"><i class="fas fa-award"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:10px;">Proven Track Record</h3>
+                    <p style="color:var(--gray-light);font-size:0.9rem;line-height:1.7;">28+ years of education expertise with a growing network of partner schools and successful program implementations.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:40px 32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:72px;height:72px;margin:0 auto 22px;background:rgba(234,179,8,0.12);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent-light);"><i class="fas fa-cogs"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:10px;">Complete Solutions</h3>
+                    <p style="color:var(--gray-light);font-size:0.9rem;line-height:1.7;">From teacher training to school management software, we provide everything a school needs under one roof.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:40px 32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:72px;height:72px;margin:0 auto 22px;background:rgba(234,179,8,0.12);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent-light);"><i class="fas fa-flag"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:10px;">SNC Aligned</h3>
+                    <p style="color:var(--gray-light);font-size:0.9rem;line-height:1.7;">All programs fully aligned with Pakistan's Single National Curriculum standards and provincial requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section>
+        <div class="container">
+            <div class="cta-section reveal">
+                <div class="inner">
+                    <h2>Ready to Transform Your School?</h2>
+                    <p>Contact us today to learn how our programs can help your school achieve academic excellence and operational efficiency.</p>
+                    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                        <a href="index.html#contact" class="btn btn-accent">
+                            <i class="fas fa-phone-alt"></i> Contact Us
+                        </a>
+                        <a href="our-partners.html" class="btn btn-white">
+                            <i class="fas fa-handshake"></i> View Partners
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="our-team.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Our Team</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Programs</a></li>
+                        <li><a href="our-partners.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Partners</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> ECE Certification</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> School Improvement</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> SNC Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digitalization</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

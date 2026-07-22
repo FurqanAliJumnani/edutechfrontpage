@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Partners - Edutech Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .partner-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 40px 32px; text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .partner-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .partner-image {
+            width: 120px; height: 120px; margin: 0 auto 24px;
+            background: var(--light); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(26,86,219,0.08);
+            overflow: hidden;
+        }
+        .partner-image img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .partner-image .placeholder-icon {
+            font-size: 2.5rem; color: var(--primary); opacity: 0.4;
+        }
+        .partner-card h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem;
+            font-weight: 700; color: var(--dark); margin-bottom: 6px;
+        }
+        .partner-card .type { color: var(--primary-light); font-size: 0.82rem; font-weight: 600; }
+        .cta-section {
+            background: var(--gradient-2); border-radius: 24px; padding: 72px 60px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); border-radius: 50%;
+        }
+        .cta-section .inner { position: relative; z-index: 2; }
+        .cta-section h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem;
+            font-weight: 800; color: var(--white); margin-bottom: 16px;
+        }
+        .cta-section p { color: var(--gray-light); font-size: 1.05rem; max-width: 550px; margin: 0 auto 36px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Our Partners
+            </div>
+            <h1>Our <span class="highlight">Partners</span> & Collaborators</h1>
+            <p>We are proud to collaborate with partner schools that share our vision of transforming education through innovation and technology.</p>
+        </div>
+    </section>
+
+    <!-- Partner Schools -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-handshake"></i> Our Partners</div>
+                <h2>Partner Schools</h2>
+                <p>Trusted schools that have joined hands with EduTech Solutions to deliver quality education and modern learning experiences.</p>
+            </div>
+            <div class="card-grid card-grid-4 reveal">
+                <div class="partner-card">
+                    <div class="partner-image">
+                        <img src="spark.jpeg" alt="The Spark High School" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-icon" style="display:none;"><i class="fas fa-school"></i></div>
+                    </div>
+                    <h3>The Spark High School</h3>
+                    <span class="type">Partner School</span>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-image">
+                        <img src="routes.jpeg" alt="The Routes High School" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-icon" style="display:none;"><i class="fas fa-school"></i></div>
+                    </div>
+                    <h3>The Routes High School</h3>
+                    <span class="type">Partner School</span>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-image">
+                        <img src="bbb.jpeg" alt="Busy Bumble Bee School" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-icon" style="display:none;"><i class="fas fa-school"></i></div>
+                    </div>
+                    <h3>Busy Bumble Bee School</h3>
+                    <span class="type">Partner School</span>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-image">
+                        <img src="the edutech.jpeg" alt="The Edutech School And College" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-icon" style="display:none;"><i class="fas fa-school"></i></div>
+                    </div>
+                    <h3>The Edutech School And College</h3>
+                    <span class="type">Partner School</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Benefits (Dark) -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> Why Partner</div>
+                <h2>Partnership Benefits</h2>
+                <p>Discover the value of partnering with EduTech Solutions for mutual growth and educational impact.</p>
+            </div>
+            <div class="card-grid card-grid-3 reveal">
+                <div class="benefit-card" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:64px;height:64px;margin:0 auto 20px;background:rgba(234,179,8,0.12);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--accent-light);"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Academic Excellence</h3>
+                    <p style="color:var(--gray-light);font-size:0.88rem;line-height:1.7;">Access EduTech's complete academic ecosystem including teacher training, curriculum support, and e-learning solutions.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:64px;height:64px;margin:0 auto 20px;background:rgba(234,179,8,0.12);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--accent-light);"><i class="fas fa-laptop"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Technology Integration</h3>
+                    <p style="color:var(--gray-light);font-size:0.88rem;line-height:1.7;">Benefit from e-learning labs, student portals, school management software, and digital content delivery systems.</p>
+                </div>
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:32px;text-align:center;transition:all 0.4s ease;backdrop-filter:blur(10px);">
+                    <div style="width:64px;height:64px;margin:0 auto 20px;background:rgba(234,179,8,0.12);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--accent-light);"><i class="fas fa-users"></i></div>
+                    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:10px;">Holistic Development</h3>
+                    <p style="color:var(--gray-light);font-size:0.88rem;line-height:1.7;">Comprehensive support covering sports, co-curricular activities, publications, and overall student development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner With Us CTA -->
+    <section>
+        <div class="container">
+            <div class="cta-section reveal">
+                <div class="inner">
+                    <h2>Partner With Us</h2>
+                    <p>Join our growing network of partner schools and institutions. Together, we can transform education and empower the next generation of learners across Pakistan.</p>
+                    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                        <a href="index.html#contact" class="btn btn-accent">
+                            <i class="fas fa-handshake"></i> Get In Touch
+                        </a>
+                        <a href="our-programs.html" class="btn btn-white">
+                            <i class="fas fa-book"></i> View Our Programs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="our-team.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Our Team</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Programs</a></li>
+                        <li><a href="our-partners.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Partners</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> ECE Certification</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> School Improvement</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> SNC Training</a></li>
+                        <li><a href="our-programs.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digitalization</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS Degree Programs & Admission - Edutech Solutions Pakistan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .program-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .program-card:hover::before {
+            transform: scaleX(1);
+        }
+        .program-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+        .program-card .card-icon {
+            width: 56px; height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            background: rgba(26,86,219,0.1);
+            color: var(--primary);
+        }
+        .program-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .program-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .program-card .btn {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .features-grid span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        .features-grid span i {
+            color: var(--primary);
+            font-size: 0.7rem;
+        }
+        .founder-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius);
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+        .founder-card .quote-icon {
+            font-size: 3rem;
+            color: rgba(26,86,219,0.12);
+            margin-bottom: 16px;
+        }
+        .founder-card blockquote {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--dark);
+            font-style: italic;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .founder-card .founder-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .founder-card .founder-avatar {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            flex-shrink: 0;
+        }
+        .founder-card .founder-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+        .founder-card .founder-title {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .faculty-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faculty-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+        .faculty-card .avatar {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .faculty-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        .faculty-card .designation {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .faculty-card .qualification {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+        .faculty-card p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .faculty-card .experience {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(234,179,8,0.08);
+            padding: 6px 14px;
+            border-radius: 50px;
+        }
+        .stats-section {
+            background: var(--gradient-2);
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-section::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(37,99,235,0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 50%, rgba(234,179,8,0.08) 0%, transparent 50%);
+        }
+        .stats-section .container { position: relative; z-index: 2; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+        .cta-section {
+            background: var(--light);
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        .cta-section p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .founder-card {
+                padding: 28px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="apply.html" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / BS 4-Year Degree Programs
+            </div>
+            <h1>BS <span class="highlight">4-Year</span> Degree Programs</h1>
+            <p>Admissions Open 2026 - Transform Your Future with Quality Education</p>
+        </div>
+    </section>
+
+    <!-- Founder's Message -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-quote-left"></i> Founder's Message</div>
+                <h2>Message From Our Founder</h2>
+            </div>
+            <div class="founder-card reveal">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <blockquote>
+                    At EduTech Degree Program, our vision is to empower the youth of Pakistan with globally recognized degree programs, future-ready skills, and advanced technology driven education. Our mission is to bridge the gap between traditional academics and modern industry requirements by integrating skill-based learning, practical training, and innovation into every program we offer. We are committed to developing competent, confident, and career-ready graduates who can contribute meaningfully to national and global progress.
+                </blockquote>
+                <div class="founder-info">
+                    <div class="founder-avatar">AZ</div>
+                    <div>
+                        <div class="founder-name">Mr. Agha Zahid Pathan</div>
+                        <div class="founder-title">Msc English & Literature, 30+ Years in Education</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section style="background: var(--light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> Why Choose Us</div>
+                <h2>Why Choose Our Programs</h2>
+                <p>We deliver more than degrees — we build careers and transform futures through quality education.</p>
+            </div>
+            <div class="card-grid card-grid-3">
+                <div class="card reveal">
+                    <div class="card-icon ci-blue"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Experienced Faculty</h3>
+                    <p>Learn from PhD holders and industry experts with 10+ years of teaching and practical experience.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-briefcase"></i></div>
+                    <h3>Career Focused</h3>
+                    <p>Programs designed with industry partnerships to ensure 95% placement rate in top companies.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon ci-blue-light"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>Affordable Education</h3>
+                    <p>Quality education at competitive fees with merit-based scholarships up to 100% tuition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Degree Programs -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-graduation-cap"></i> Our Programs</div>
+                <h2>Available Degree Programs</h2>
+                <p>Choose from our specialized BS degree programs designed to meet the demands of today's job market.</p>
+            </div>
+            <div class="card-grid card-grid-2">
+                <div class="program-card reveal">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>BS Computer Science</h3>
+                    <p>Master programming, software engineering, AI, data science, and web development.</p>
+                    <div class="features-grid">
+                        <span><i class="fas fa-check-circle"></i> 4-Year Program</span>
+                        <span><i class="fas fa-check-circle"></i> HEC Recognized</span>
+                        <span><i class="fas fa-check-circle"></i> Industry Projects</span>
+                        <span><i class="fas fa-check-circle"></i> Job Placement</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon" style="background: rgba(234,179,8,0.1); color: var(--accent);"><i class="fas fa-brain"></i></div>
+                    <h3>BS Artificial Intelligence</h3>
+                    <p>Specialize in AI, machine learning, deep learning, and neural networks.</p>
+                    <div class="features-grid">
+                        <span><i class="fas fa-check-circle"></i> 4-Year Program</span>
+                        <span><i class="fas fa-check-circle"></i> HEC Recognized</span>
+                        <span><i class="fas fa-check-circle"></i> AI Research Labs</span>
+                        <span><i class="fas fa-check-circle"></i> High Demand Field</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon" style="background: rgba(37,99,235,0.1); color: var(--primary-light);"><i class="fas fa-wifi"></i></div>
+                    <h3>BS Information Technology</h3>
+                    <p>Focus on networking, cybersecurity, database management, and IT infrastructure.</p>
+                    <div class="features-grid">
+                        <span><i class="fas fa-check-circle"></i> 4-Year Program</span>
+                        <span><i class="fas fa-check-circle"></i> HEC Recognized</span>
+                        <span><i class="fas fa-check-circle"></i> Cisco Certified</span>
+                        <span><i class="fas fa-check-circle"></i> Network Labs</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon" style="background: rgba(234,179,8,0.1); color: var(--accent);"><i class="fas fa-pen-fancy"></i></div>
+                    <h3>BS English Language</h3>
+                    <p>Master modern English, linguistics, literature, and communication skills.</p>
+                    <div class="features-grid">
+                        <span><i class="fas fa-check-circle"></i> 4-Year Program</span>
+                        <span><i class="fas fa-check-circle"></i> HEC Recognized</span>
+                        <span><i class="fas fa-check-circle"></i> International Faculty</span>
+                        <span><i class="fas fa-check-circle"></i> Career Counseling</span>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section style="background: var(--light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-users"></i> Our Faculty</div>
+                <h2>Meet Our Expert Faculty</h2>
+                <p>Learn from highly qualified professionals dedicated to shaping your academic and career success.</p>
+            </div>
+            <div class="card-grid card-grid-4">
+                <div class="faculty-card reveal">
+                    <div class="avatar">AB</div>
+                    <h3>Dr. Atia Bano Memon</h3>
+                    <div class="designation">Consultant</div>
+                    <div class="qualification">PhD Computer Science</div>
+                    <p>Expertise in core computer science concepts including algorithms, software engineering, databases, and AI.</p>
+                    <div class="experience"><i class="fas fa-clock"></i> 25+ Years</div>
+                </div>
+                <div class="faculty-card reveal">
+                    <div class="avatar" style="background: linear-gradient(135deg, #eab308 0%, #facc15 100%);">SA</div>
+                    <h3>Dr. Shauban Ali</h3>
+                    <div class="designation">Permanent</div>
+                    <div class="qualification">PhD IT</div>
+                    <p>Expertise in information systems, data administration, networking, databases, cybersecurity.</p>
+                    <div class="experience"><i class="fas fa-clock"></i> 15+ Years</div>
+                </div>
+                <div class="faculty-card reveal">
+                    <div class="avatar" style="background: linear-gradient(135deg, #1a56db 0%, #2563eb 100%);">AL</div>
+                    <h3>Dr. Abdullah Laghari</h3>
+                    <div class="designation">Consultant</div>
+                    <div class="qualification">PhD English</div>
+                    <p>Specializing in English Language And Literature with 25 years of teaching experience.</p>
+                    <div class="experience"><i class="fas fa-clock"></i> 25+ Years</div>
+                </div>
+                <div class="faculty-card reveal">
+                    <div class="avatar" style="background: linear-gradient(135deg, #0b1d3a 0%, #112240 100%);">SS</div>
+                    <h3>Prof. Samiullah Soomro</h3>
+                    <div class="designation">Visiting</div>
+                    <div class="qualification">Msc CS</div>
+                    <p>Specializing in AI & Machine Learning with 15 years of teaching experience.</p>
+                    <div class="experience"><i class="fas fa-clock"></i> 15+ Years</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" style="padding: 80px 0;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-box reveal">
+                    <h3>50+</h3>
+                    <p>Faculty Members</p>
+                </div>
+                <div class="stat-box reveal">
+                    <h3>60%</h3>
+                    <p>PhD Holders</p>
+                </div>
+                <div class="stat-box reveal">
+                    <h3>10+</h3>
+                    <p>Years Avg Experience</p>
+                </div>
+                <div class="stat-box reveal">
+                    <h3>100+</h3>
+                    <p>Research Publications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-tag"><i class="fas fa-rocket"></i> Join Us</div>
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Join hundreds of students who are building their future with Edutech. Admissions are open for 2026.</p>
+                <a href="#apply" class="btn btn-accent" style="font-size: 1rem; padding: 16px 36px;">Apply Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Projects</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Edutech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

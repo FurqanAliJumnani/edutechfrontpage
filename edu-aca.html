@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTech Academy - Unified Platform for Courses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* PAGE-EXTRA */
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-split .about-visual {
+            position: relative;
+        }
+        .about-img {
+            width: 100%;
+            height: 420px;
+            background: var(--gradient-1);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .about-img i {
+            font-size: 5.5rem;
+            color: rgba(255,255,255,0.12);
+        }
+        .about-badge {
+            position: absolute;
+            bottom: -16px;
+            right: -16px;
+            background: var(--white);
+            border-radius: 18px;
+            padding: 20px 28px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .about-badge .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(234,179,8,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        .about-badge .text h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+        .about-badge .text p {
+            font-size: 0.78rem;
+            color: var(--gray);
+        }
+        .about-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+        .about-text h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .about-text > p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+        .about-text .highlight-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        .about-text .highlight-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+        .about-text .highlight-list li i {
+            color: var(--primary);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* COURSE CARDS */
+        .course-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius);
+            padding: 36px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        .course-card:hover::before { transform: scaleX(1); }
+        .course-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: transparent; }
+        .course-card .card-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 22px;
+            transition: all 0.3s ease;
+        }
+        .course-card:hover .card-icon { transform: scale(1.1); }
+        .course-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .course-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .course-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+        .course-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--gray);
+            background: var(--light);
+            padding: 6px 14px;
+            border-radius: 50px;
+        }
+        .course-meta span i {
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+        .course-card .btn {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+        }
+
+        /* DARK FEATURES CARDS */
+        .dark-feature-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 36px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        .dark-feature-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.15);
+        }
+        .dark-feature-card i {
+            font-size: 1.8rem;
+            color: var(--accent-light);
+            margin-bottom: 18px;
+            display: block;
+        }
+        .dark-feature-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .dark-feature-card p {
+            color: var(--gray-light);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        /* PRICING */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* JOIN FORM */
+        .join-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .join-info h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .join-info h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .join-info > p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+        .join-benefits {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+        .join-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+        .join-benefits li i {
+            width: 28px;
+            height: 28px;
+            background: rgba(26,86,219,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .about-split,
+            .join-grid { grid-template-columns: 1fr; gap: 36px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .page-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / EduTech Academy
+            </div>
+            <h1>Unified <span class="highlight">Platform</span> for Courses</h1>
+            <p>EduTech Academy provides a centralized platform for all courses, from professional development to academic programs. Access resources, enroll in courses, and track your learning journey seamlessly.</p>
+        </div>
+    </section>
+
+    <!-- About Academy -->
+    <section class="about" style="background: var(--light);">
+        <div class="container">
+            <div class="about-split">
+                <div class="about-visual reveal">
+                    <div class="about-img">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="about-badge">
+                        <div class="icon"><i class="fas fa-award"></i></div>
+                        <div class="text">
+                            <h4>50+</h4>
+                            <p>Courses Available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-tag"><i class="fas fa-info-circle"></i> About Academy</div>
+                    <h2>A Unified <span class="highlight">Ecosystem</span> for All Learning</h2>
+                    <p>EduTech Academy is the flagship learning platform of Edutech Solutions, built to deliver a seamless and comprehensive ecosystem for all courses, training programs, and professional development initiatives. Whether you're a student beginning your journey, a professional upskilling, or an educator seeking growth, the Academy is designed to meet you where you are.</p>
+                    <p>From digital literacy to professional development, our platform offers courses across diverse disciplines designed to equip learners with the knowledge, skills, and confidence they need to succeed in today's rapidly evolving world.</p>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> Comprehensive courses from digital literacy to professional development</li>
+                        <li><i class="fas fa-check-circle"></i> Hybrid learning: online and in-person options</li>
+                        <li><i class="fas fa-check-circle"></i> Expert instructors with real-world experience</li>
+                        <li><i class="fas fa-check-circle"></i> Career placement and mentorship support</li>
+                    </ul>
+                    <a href="#courses" class="btn btn-primary">
+                        View Courses <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Courses -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-book-open"></i> Available Courses</div>
+                <h2>Explore Our Top Courses</h2>
+                <p>Choose from a wide range of courses designed to equip you with the skills that today's industry demands.</p>
+            </div>
+            <div class="card-grid card-grid-3">
+                <div class="course-card reveal">
+                    <div class="card-icon ci-blue"><i class="fas fa-laptop"></i></div>
+                    <h3>Digital Literacy</h3>
+                    <p>Basic computer skills and internet safety essentials for navigating the digital world with confidence.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 3 Months</span>
+                        <span><i class="fas fa-signal"></i> Beginner</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="course-card reveal">
+                    <div class="card-icon ci-blue-light"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript, React — learn to build modern, responsive websites and web applications.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 6 Months</span>
+                        <span><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="course-card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-palette"></i></div>
+                    <h3>Graphic Design</h3>
+                    <p>Photoshop, Illustrator, UI Design — master visual communication and creative design principles.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 4 Months</span>
+                        <span><i class="fas fa-signal"></i> Beginner</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="course-card reveal">
+                    <div class="card-icon ci-blue"><i class="fas fa-chart-line"></i></div>
+                    <h3>Data Science</h3>
+                    <p>Python, Statistics, Machine Learning — dive into data analysis and advanced predictive modeling.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 8 Months</span>
+                        <span><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="course-card reveal">
+                    <div class="card-icon ci-blue-light"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile App Development</h3>
+                    <p>Android & iOS development — build cross-platform mobile applications from concept to deployment.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 6 Months</span>
+                        <span><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="course-card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Digital Marketing</h3>
+                    <p>SEO, Social Media, Content Marketing — learn strategies to grow any business online.</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> 4 Months</span>
+                        <span><i class="fas fa-signal"></i> Beginner</span>
+                    </div>
+                    <a href="#join" class="btn btn-primary">
+                        Enroll Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Features (Dark) -->
+    <section class="dark-section" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> Course Features</div>
+                <h2>What Makes Our Academy Different</h2>
+                <p>Designed for real results, our learning experience goes beyond the classroom with tools and support that ensure success.</p>
+            </div>
+            <div class="card-grid card-grid-3">
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-video"></i>
+                    <h3>Live Online Classes</h3>
+                    <p>Attend interactive live sessions with expert instructors. Ask questions in real time and collaborate with fellow learners.</p>
+                </div>
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>Recorded Lectures</h3>
+                    <p>Missed a class? Access high-quality recorded lectures anytime, anywhere. Learn at your own pace with lifetime access.</p>
+                </div>
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Hands-On Projects</h3>
+                    <p>Apply what you learn through real-world projects, assignments, and capstone challenges that build your portfolio.</p>
+                </div>
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Industry Certification</h3>
+                    <p>Earn recognized certifications upon completion that validate your skills and boost your professional credibility.</p>
+                </div>
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Career Support</h3>
+                    <p>Get access to career counseling, resume reviews, interview preparation, and job placement assistance after graduation.</p>
+                </div>
+                <div class="dark-feature-card reveal">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Forum</h3>
+                    <p>Join a vibrant community of learners and mentors. Share knowledge, solve problems together, and network professionally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-tags"></i> Pricing Plans</div>
+                <h2>Flexible Plans for Every Learner</h2>
+                <p>Invest in your future with transparent pricing and no hidden fees. Choose the plan that fits your goals.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Basic</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Perfect for beginners</p>
+                    <div class="price">Rs 5,000 <span>/mo</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> 2 Courses</li>
+                        <li><i class="fas fa-check"></i> Email Support</li>
+                        <li><i class="fas fa-check"></i> Basic Resources</li>
+                    </ul>
+                    <a href="#join" class="btn btn-outline" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <h3>Professional</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Best for career growth</p>
+                    <div class="price">Rs 10,000 <span>/mo</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> 5 Courses</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> All Resources</li>
+                        <li><i class="fas fa-check"></i> Certificates</li>
+                    </ul>
+                    <a href="#join" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+                </div>
+                <div class="pricing-card reveal">
+                    <h3>Enterprise</h3>
+                    <p style="color: var(--gray); font-size: 0.9rem;">For teams & organizations</p>
+                    <div class="price">Rs 20,000 <span>/mo</span></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Unlimited Courses</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                        <li><i class="fas fa-check"></i> Custom Learning</li>
+                        <li><i class="fas fa-check"></i> Mentoring</li>
+                    </ul>
+                    <a href="#join" class="btn btn-outline" style="width: 100%; justify-content: center;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Academy Form -->
+    <section class="join" id="join" style="background: var(--light);">
+        <div class="container">
+            <div class="join-grid">
+                <div class="join-info reveal">
+                    <div class="section-tag"><i class="fas fa-rocket"></i> Join Academy</div>
+                    <h2>Start Your <span class="highlight">Learning Journey</span> Today</h2>
+                    <p>Fill out the enrollment form and our team will get in touch with you within 24 hours to guide you through the onboarding process.</p>
+                    <ul class="join-benefits">
+                        <li><i class="fas fa-check"></i> Personalized course recommendations</li>
+                        <li><i class="fas fa-check"></i> Free consultation session with a mentor</li>
+                        <li><i class="fas fa-check"></i> Access to community resources from day one</li>
+                        <li><i class="fas fa-check"></i> No commitment required to get started</li>
+                        <li><i class="fas fa-check"></i> Flexible payment options available</li>
+                    </ul>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 42px; height: 42px; background: rgba(26,86,219,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 0.95rem;">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Call Us</div>
+                                <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark);">+92 339 899 8930</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 42px; height: 42px; background: rgba(234,179,8,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 0.95rem;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Email</div>
+                                <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark);">info@edutechsolutionpk.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-card reveal">
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 24px;">
+                        <i class="fas fa-user-plus" style="color: var(--primary); margin-right: 8px;"></i> Join Academy
+                    </h3>
+                    <form>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="+92 3XX XXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Course</label>
+                                <select>
+                                    <option value="" disabled selected>Select a course</option>
+                                    <option>Digital Literacy</option>
+                                    <option>Web Development</option>
+                                    <option>Graphic Design</option>
+                                    <option>Data Science</option>
+                                    <option>Mobile App Development</option>
+                                    <option>Digital Marketing</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Experience Level</label>
+                                <select>
+                                    <option value="" disabled selected>Select level</option>
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Submit Enrollment <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Projects</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Edutech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        reveals.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

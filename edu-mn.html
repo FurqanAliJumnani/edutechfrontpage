@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Childhood Education Programs - Edutech Solutions Pakistan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .programs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+        .program-card { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius); padding: 36px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient-1); transform: scaleX(0); transition: transform 0.4s ease; }
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: transparent; }
+        .program-card .card-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .program-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+        .program-card .age-tag { display: inline-block; background: rgba(26,86,219,0.08); color: var(--primary); padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 14px; }
+        .program-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+        .program-card .service-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary-light); font-weight: 600; font-size: 0.85rem; transition: all 0.3s ease; }
+        .program-card .service-link i { transition: transform 0.3s ease; }
+        .program-card:hover .service-link i { transform: translateX(4px); }
+
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .why-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 36px; transition: all 0.4s ease; backdrop-filter: blur(10px); }
+        .why-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-6px); border-color: rgba(255,255,255,0.15); }
+        .why-card .why-icon { width: 56px; height: 56px; background: rgba(234,179,8,0.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--accent-light); margin-bottom: 20px; }
+        .why-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+        .why-card p { color: var(--gray-light); font-size: 0.88rem; line-height: 1.7; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+
+        .enroll-section { background: var(--light); }
+        .enroll-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        .enroll-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        .enroll-info > p { color: var(--gray); margin-bottom: 32px; line-height: 1.8; }
+        .enroll-highlights { display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+        .enroll-highlight { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--white); border-radius: var(--radius); border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .enroll-highlight:hover { transform: translateX(6px); box-shadow: var(--shadow-md); }
+        .enroll-highlight i { color: var(--primary-light); font-size: 1.1rem; flex-shrink: 0; }
+        .enroll-highlight span { font-size: 0.92rem; font-weight: 500; color: var(--dark); }
+
+        @media (max-width: 1024px) {
+            .programs-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .programs-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .enroll-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Early Childhood Education
+            </div>
+            <h1>Early Childhood <span class="highlight">Education</span> Programs</h1>
+            <p>Our Montessori programs focus on nurturing children's creativity, independence, and learning skills. We provide internationally recognized certifications and hands-on training for educators.</p>
+        </div>
+    </section>
+
+    <!-- About Our Montessori -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual reveal">
+                    <div class="about-image-main">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="about-image-overlay">
+                        <div class="icon"><i class="fas fa-certificate"></i></div>
+                        <div class="text">
+                            <h4>AMI Aligned</h4>
+                            <p>International Standards</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <div class="section-tag"><i class="fas fa-info-circle"></i> About Our Montessori</div>
+                    <h2>Building Strong Foundations for <span class="highlight">Lifelong Learning</span></h2>
+                    <p>Our Montessori programs are designed to provide a nurturing environment where children develop at their own pace through hands-on learning. We combine internationally recognized Montessori methods with modern educational practices to build strong foundations for lifelong learning.</p>
+                    <div class="about-values">
+                        <div class="value-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h4>Holistic Development</h4>
+                                <p>Physical, cognitive, social & emotional growth</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-globe-asia"></i>
+                            <div>
+                                <h4>International Curriculum</h4>
+                                <p>Aligned with AMI & Montessori guidelines</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-hands-helping"></i>
+                            <div>
+                                <h4>Individual Pace</h4>
+                                <p>Each child learns at their own speed</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Safe Environment</h4>
+                                <p>Nurturing spaces for curious minds</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#enroll" class="btn btn-primary">
+                        Enroll Your Child <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Montessori Programs -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-th-large"></i> Our Programs</div>
+                <h2>Our Montessori Programs</h2>
+                <p>Age-appropriate programs designed to nurture every stage of your child's development journey.</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-baby"></i></div>
+                    <h3>Toddler Program</h3>
+                    <span class="age-tag">1.5 - 3 Years</span>
+                    <p>Sensory development, motor skills, and early social interaction through carefully designed Montessori materials and guided activities.</p>
+                    <a href="#enroll" class="service-link">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon ci-blue"><i class="fas fa-puzzle-piece"></i></div>
+                    <h3>Primary Montessori</h3>
+                    <span class="age-tag">3 - 6 Years</span>
+                    <p>Reading, math, science, and creative expression through guided exploration using proven Montessori hands-on learning materials.</p>
+                    <a href="#enroll" class="service-link">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon ci-blue-light"><i class="fas fa-book-reader"></i></div>
+                    <h3>Junior Montessori</h3>
+                    <span class="age-tag">6 - 9 Years</span>
+                    <p>Advanced learning, critical thinking, and collaborative projects that bridge early Montessori principles with formal academic skills.</p>
+                    <a href="#enroll" class="service-link">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Teacher Certification Course</h3>
+                    <span class="age-tag">Professional Course</span>
+                    <p>Comprehensive Montessori teacher training with international certification covering methodology, child psychology, and classroom practice.</p>
+                    <a href="#certification" class="service-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Montessori -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> The Montessori Method</div>
+                <h2>Why Montessori Education?</h2>
+                <p>A century-proven approach that develops confident, independent, and capable learners.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-child"></i></div>
+                    <h3>Child-Centered Learning</h3>
+                    <p>Every child learns at their own pace, with activities designed around their natural interests and developmental readiness.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-hands"></i></div>
+                    <h3>Hands-On Materials</h3>
+                    <p>Physical learning tools for conceptual understanding, transforming abstract ideas into tangible, intuitive experiences.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-users"></i></div>
+                    <h3>Mixed Age Groups</h3>
+                    <p>Peer learning across age groups creates a family-like community where older children mentor younger ones.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-compass"></i></div>
+                    <h3>Self-Directed Activity</h3>
+                    <p>Building independence and confidence as children choose their own work within a structured, supportive framework.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-home"></i></div>
+                    <h3>Prepared Environment</h3>
+                    <p>Carefully designed learning spaces with child-sized furniture, accessible materials, and orderly layouts that invite exploration.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Trained Montessori Teachers</h3>
+                    <p>Certified and experienced educators who observe, guide, and inspire each child's unique developmental journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification Courses -->
+    <section id="certification">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-certificate"></i> Certification Courses</div>
+                <h2>Montessori Teacher Certification</h2>
+                <p>Professional development programs to equip educators with internationally recognized Montessori credentials.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <h3>Diploma in Montessori</h3>
+                    <div class="price">Rs 25,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> 3 Month Duration</li>
+                        <li><i class="fas fa-check-circle"></i> Practical Training</li>
+                        <li><i class="fas fa-check-circle"></i> Child Development Fundamentals</li>
+                        <li><i class="fas fa-check-circle"></i> Montessori Materials Training</li>
+                        <li><i class="fas fa-check-circle"></i> Classroom Management Techniques</li>
+                        <li><i class="fas fa-check-circle"></i> Edutech Certification</li>
+                    </ul>
+                    <a href="#enroll" class="btn btn-outline" style="width:100%; justify-content:center;">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="pricing-card featured reveal">
+                    <h3>Advanced Montessori</h3>
+                    <div class="price">Rs 45,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> 6 Month Duration</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced Methods</li>
+                        <li><i class="fas fa-check-circle"></i> Internship Included</li>
+                        <li><i class="fas fa-check-circle"></i> All Levels (Toddler to Junior)</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced Child Psychology</li>
+                        <li><i class="fas fa-check-circle"></i> Curriculum Design & Planning</li>
+                        <li><i class="fas fa-check-circle"></i> International Montessori Recognition</li>
+                    </ul>
+                    <a href="#enroll" class="btn btn-primary" style="width:100%; justify-content:center;">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="pricing-card reveal">
+                    <h3>Montessori Leadership</h3>
+                    <div class="price">Rs 65,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> 9 Month Duration</li>
+                        <li><i class="fas fa-check-circle"></i> Leadership Skills</li>
+                        <li><i class="fas fa-check-circle"></i> School Management</li>
+                        <li><i class="fas fa-check-circle"></i> Complete Montessori Methodology</li>
+                        <li><i class="fas fa-check-circle"></i> Teacher Training & Mentorship</li>
+                        <li><i class="fas fa-check-circle"></i> School Setup & Compliance</li>
+                        <li><i class="fas fa-check-circle"></i> Business Management for Schools</li>
+                    </ul>
+                    <a href="#enroll" class="btn btn-outline" style="width:100%; justify-content:center;">Apply Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enroll Now Form -->
+    <section class="enroll-section" id="enroll">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-pen-fancy"></i> Get Started</div>
+                <h2>Enroll Now</h2>
+                <p>Give your child the gift of a Montessori education. Fill out the form to begin the enrollment process.</p>
+            </div>
+            <div class="enroll-grid">
+                <div class="enroll-info reveal">
+                    <h3>Begin Your Child's Montessori Journey</h3>
+                    <p>Our admissions team will guide you through every step of the enrollment process. We accept children across all our programs throughout the year, subject to available seats.</p>
+                    <div class="enroll-highlights">
+                        <div class="enroll-highlight">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Personalized campus tour and classroom observation</span>
+                        </div>
+                        <div class="enroll-highlight">
+                            <i class="fas fa-check-circle"></i>
+                            <span>One-on-one meeting with our Montessori guides</span>
+                        </div>
+                        <div class="enroll-highlight">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Child-friendly assessment and placement guidance</span>
+                        </div>
+                        <div class="enroll-highlight">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Flexible payment plans available for all programs</span>
+                        </div>
+                        <div class="enroll-highlight">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ongoing parent-teacher communication & updates</span>
+                        </div>
+                    </div>
+                    <a href="tel:+923398998930" class="btn btn-primary">
+                        <i class="fas fa-phone-alt"></i> Call Us: +92 339 899 8930
+                    </a>
+                </div>
+                <div class="contact-form-card reveal">
+                    <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; color:var(--dark); margin-bottom:24px;">Enrollment Form</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Parent Name</label>
+                                <input type="text" placeholder="Enter parent's full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Child Name</label>
+                                <input type="text" placeholder="Enter child's full name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Child Age</label>
+                                <input type="text" placeholder="e.g. 4 years" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="parent@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="+92 3XX XXXXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Program</label>
+                                <select required>
+                                    <option value="" disabled selected>Select a program</option>
+                                    <option>Toddler Program (1.5 - 3 Years)</option>
+                                    <option>Primary Montessori (3 - 6 Years)</option>
+                                    <option>Junior Montessori (6 - 9 Years)</option>
+                                    <option>Diploma in Montessori</option>
+                                    <option>Advanced Montessori</option>
+                                    <option>Montessori Leadership</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Submit Enrollment <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Give Your Child the Best Start</h2>
+                <p>Join our Montessori community and watch your child flourish in a nurturing, stimulating, and truly child-centered environment.</p>
+                <div class="cta-buttons">
+                    <a href="#enroll" class="btn btn-white">
+                        Enroll Today <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="tel:+923398998930" class="btn btn-outline" style="border-color: rgba(255,255,255,0.3); color: var(--white);">
+                        <i class="fas fa-phone-alt"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Projects</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Edutech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        reveals.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

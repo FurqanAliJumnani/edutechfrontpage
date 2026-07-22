@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School & College Solutions - Edutech Solutions Pakistan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-split {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+        }
+        .about-img {
+            width: 100%; height: 420px; background: var(--gradient-1); border-radius: 24px;
+            display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+        }
+        .about-img i { font-size: 5.5rem; color: rgba(255,255,255,0.12); }
+        .about-badge {
+            position: absolute; bottom: -16px; right: -16px; background: var(--white);
+            border-radius: 18px; padding: 20px 28px; box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 14px;
+        }
+        .about-badge .icon {
+            width: 48px; height: 48px; background: rgba(234,179,8,0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.2rem;
+        }
+        .about-badge .text h4 { font-size: 1.5rem; font-weight: 800; color: var(--dark); }
+        .about-badge .text p { font-size: 0.78rem; color: var(--gray); }
+        .about-text h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 800;
+            color: var(--dark); line-height: 1.2; margin-bottom: 18px;
+        }
+        .about-text h2 .highlight {
+            background: var(--gradient-1); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .about-text > p { color: var(--gray); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
+        .about-text .highlight-list {
+            list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;
+        }
+        .about-text .highlight-list li {
+            display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem;
+            color: var(--dark); line-height: 1.7;
+        }
+        .about-text .highlight-list li i {
+            color: var(--primary); font-size: 0.85rem; margin-top: 5px; flex-shrink: 0;
+        }
+
+        .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .program-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius);
+            padding: 36px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+        }
+        .program-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient-1); transform: scaleX(0); transition: transform 0.4s ease;
+        }
+        .program-card:hover::before { transform: scaleX(1); }
+        .program-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: transparent; }
+        .program-card .card-icon {
+            width: 64px; height: 64px; border-radius: 16px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px;
+        }
+        .program-card .grade-badge {
+            display: inline-block; background: rgba(26,86,219,0.08); color: var(--primary);
+            padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; margin-bottom: 14px;
+        }
+        .program-card h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700;
+            color: var(--dark); margin-bottom: 10px;
+        }
+        .program-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+        .program-card .features-list { list-style: none; margin-bottom: 24px; }
+        .program-card .features-list li {
+            display: flex; align-items: center; gap: 10px; padding: 8px 0;
+            font-size: 0.85rem; color: var(--dark); border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+        .program-card .features-list li:last-child { border-bottom: none; }
+        .program-card .features-list li i { color: var(--primary); font-size: 0.7rem; flex-shrink: 0; }
+        .program-card .service-link {
+            display: inline-flex; align-items: center; gap: 8px; color: var(--primary-light);
+            font-weight: 600; font-size: 0.85rem; transition: all 0.3s ease;
+        }
+        .program-card .service-link i { transition: transform 0.3s ease; }
+        .program-card:hover .service-link i { transform: translateX(4px); }
+
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .feature-card {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius); padding: 36px; transition: all 0.4s ease; backdrop-filter: blur(10px);
+        }
+        .feature-card:hover {
+            background: rgba(255,255,255,0.1); transform: translateY(-6px); border-color: rgba(255,255,255,0.15);
+        }
+        .feature-card .feature-icon {
+            width: 60px; height: 60px; background: rgba(234,179,8,0.12); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+            color: var(--accent-light); margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600;
+            color: var(--white); margin-bottom: 10px;
+        }
+        .feature-card p { color: var(--gray-light); font-size: 0.88rem; line-height: 1.7; }
+
+        .timeline { position: relative; padding-left: 50px; max-width: 800px; margin: 0 auto; }
+        .timeline::before {
+            content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        .timeline-item { position: relative; margin-bottom: 48px; display: flex; align-items: flex-start; gap: 20px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-marker {
+            position: absolute; left: -50px; top: 0; width: 40px; height: 40px;
+            background: var(--gradient-1); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: var(--white);
+            font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem;
+            border: 4px solid var(--white); box-shadow: var(--shadow-md); z-index: 2; flex-shrink: 0;
+        }
+        .timeline-content {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 28px 32px; flex: 1; transition: all 0.3s ease;
+        }
+        .timeline-content:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+        .timeline-content h4 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
+            color: var(--dark); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+        }
+        .timeline-content h4 i { color: var(--primary-light); font-size: 0.95rem; }
+        .timeline-content p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+        .partner-form-card {
+            background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-sm);
+        }
+        .apply-section { background: var(--light); }
+        .apply-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: flex-start; }
+        .apply-info h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        .apply-info > p { color: var(--gray); margin-bottom: 32px; line-height: 1.7; }
+        .apply-steps { display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px; }
+        .apply-step { display: flex; align-items: flex-start; gap: 16px; }
+        .apply-step-num { width: 40px; height: 40px; background: var(--gradient-1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--white); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+        .apply-step-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .apply-step-text p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+        @media (max-width: 1024px) {
+            .programs-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .about-split { grid-template-columns: 1fr; gap: 36px; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .apply-grid { grid-template-columns: 1fr; }
+            .page-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="apply.html" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / School & College
+            </div>
+            <h1>School & College <span class="highlight">Solutions</span></h1>
+            <p>Empowering educational institutions with cutting-edge technology to enhance learning outcomes and streamline administration across every level.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" style="background: var(--light);">
+        <div class="container">
+            <div class="about-split">
+                <div class="about-visual reveal">
+                    <div class="about-img">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="about-badge">
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
+                        <div class="text">
+                            <h4>50K+</h4>
+                            <p>Students Empowered</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-tag"><i class="fas fa-info-circle"></i> Comprehensive Education</div>
+                    <h2>Transforming Education at <span class="highlight">Every Level</span></h2>
+                    <p>At Edutech Solutions Pakistan, we understand that education is the cornerstone of national progress. Our comprehensive suite of solutions spans across elementary education, secondary education, and higher education, providing tailored technology that addresses the unique challenges of each educational tier.</p>
+                    <p>Whether it's a small rural school seeking basic digital tools or a metropolitan college requiring enterprise-grade solutions, our team designs, deploys, and supports technology ecosystems that drive measurable improvements in teaching quality, administrative efficiency, and student engagement.</p>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-check-circle"></i> Elementary education: Building strong foundations for young learners</li>
+                        <li><i class="fas fa-check-circle"></i> Secondary education: Preparing students for advanced academic challenges</li>
+                        <li><i class="fas fa-check-circle"></i> Higher education: World-class digital infrastructure for colleges</li>
+                        <li><i class="fas fa-check-circle"></i> End-to-end support from consultation to deployment</li>
+                    </ul>
+                    <a href="#programs" class="btn btn-primary">
+                        Explore Programs <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Programs -->
+    <section id="programs">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-th-large"></i> Our School Programs</div>
+                <h2>Tailored Solutions for Every Level</h2>
+                <p>Each program is designed with age-appropriate technology, curriculum-aligned tools, and measurable learning outcomes.</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card reveal">
+                    <div class="card-icon ci-yellow"><i class="fas fa-child"></i></div>
+                    <span class="grade-badge">Grades 1-5</span>
+                    <h3>Elementary School</h3>
+                    <p>Laying the foundation for lifelong learning with engaging, interactive digital tools designed specifically for young minds.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Interactive learning games & apps</li>
+                        <li><i class="fas fa-check-circle"></i> Digital storytelling platforms</li>
+                        <li><i class="fas fa-check-circle"></i> Parent communication portals</li>
+                        <li><i class="fas fa-check-circle"></i> Basic computer literacy curriculum</li>
+                        <li><i class="fas fa-check-circle"></i> Animated educational content</li>
+                    </ul>
+                    <a href="#partner" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon ci-blue"><i class="fas fa-graduation-cap"></i></div>
+                    <span class="grade-badge">Grades 6-10</span>
+                    <h3>Secondary School</h3>
+                    <p>Preparing students for academic excellence with advanced digital tools, career guidance, and comprehensive analytics.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> LMS with curriculum alignment</li>
+                        <li><i class="fas fa-check-circle"></i> Online examination systems</li>
+                        <li><i class="fas fa-check-circle"></i> STEM lab virtualization</li>
+                        <li><i class="fas fa-check-circle"></i> Student performance analytics</li>
+                        <li><i class="fas fa-check-circle"></i> Career counseling platforms</li>
+                    </ul>
+                    <a href="#partner" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="program-card reveal">
+                    <div class="card-icon ci-blue-light"><i class="fas fa-university"></i></div>
+                    <span class="grade-badge">Grades 11-12</span>
+                    <h3>Higher Secondary</h3>
+                    <p>Bridging school and university with college-prep technology, advanced labs, and university admission guidance tools.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Advanced LMS & virtual labs</li>
+                        <li><i class="fas fa-check-circle"></i> University admission portals</li>
+                        <li><i class="fas fa-check-circle"></i> Research project management</li>
+                        <li><i class="fas fa-check-circle"></i> AI-powered tutoring systems</li>
+                        <li><i class="fas fa-check-circle"></i> Collaborative learning spaces</li>
+                    </ul>
+                    <a href="#partner" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart School Features -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-star"></i> Smart School Features</div>
+                <h2>Intelligent Tools for Modern Schools</h2>
+                <p>Our integrated platform brings automation, transparency, and intelligence to every aspect of school management.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-fingerprint"></i></div>
+                    <h3>Digital Attendance</h3>
+                    <p>Biometric and RFID-based attendance systems that eliminate manual registers and provide real-time notifications to parents.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
+                    <h3>Online Fee Management</h3>
+                    <p>Complete fee collection system with online payment gateways, automated receipts, and reminder notifications.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Parent Portal</h3>
+                    <p>Dedicated portal for parents to track attendance, grades, assignments, and communicate directly with teachers.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Digital Library</h3>
+                    <p>Vast collection of e-books, audiobooks, and research materials accessible to students and faculty 24/7.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-video"></i></div>
+                    <h3>Virtual Classes</h3>
+                    <p>Integrated video conferencing with whiteboard, screen sharing, session recording, and breakout rooms.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Performance Analytics</h3>
+                    <p>AI-driven dashboards that track student performance trends, predict outcomes, and suggest interventions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Setup Process -->
+    <section>
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-route"></i> School Setup Process</div>
+                <h2>From Vision to Digital Campus</h2>
+                <p>Our proven six-step process ensures a smooth transition from traditional to digital education.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">01</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-comments"></i> Consultation</h4>
+                        <p>We conduct a thorough assessment of your institution's current infrastructure, goals, challenges, and budget to craft a customized digital transformation roadmap.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">02</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-drafting-compass"></i> Infrastructure Planning</h4>
+                        <p>Our architects design the complete technical infrastructure including network setup, hardware procurement, server deployment, and classroom technology blueprints.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">03</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-book"></i> Curriculum Setup</h4>
+                        <p>We align the digital platform with your curriculum requirements, configure the LMS, and integrate subject-specific tools and content libraries.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">04</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-chalkboard-teacher"></i> Teacher Training</h4>
+                        <p>Comprehensive training programs for teachers and staff to ensure confident adoption of all digital tools and platforms.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">05</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-plug"></i> Digital Integration</h4>
+                        <p>Full deployment of all systems including student data migration, parent portal setup, and integration with existing administrative workflows.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-marker">06</div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-rocket"></i> Launch & Support</h4>
+                        <p>Go live with dedicated on-site support during the first month, followed by 24/7 remote monitoring, maintenance, and continuous improvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner With Us Form -->
+    <section class="apply-section" id="partner">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-tag"><i class="fas fa-handshake"></i> Partner With Us</div>
+                <h2>Start Your Digital Transformation</h2>
+                <p>Fill out the form below and our education specialists will get in touch within 24 hours.</p>
+            </div>
+            <div class="apply-grid">
+                <div class="apply-info reveal">
+                    <h3>Why Choose Edutech?</h3>
+                    <p>Join hundreds of schools and institutions across Pakistan that have transformed their operations through our technology solutions.</p>
+                    <div class="apply-steps">
+                        <div class="apply-step">
+                            <div class="apply-step-num">1</div>
+                            <div class="apply-step-text">
+                                <h4>Share Your Requirements</h4>
+                                <p>Tell us about your school's size, current infrastructure, and goals.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">2</div>
+                            <div class="apply-step-text">
+                                <h4>Get a Custom Plan</h4>
+                                <p>Our team will design a tailored digital transformation roadmap.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">3</div>
+                            <div class="apply-step-text">
+                                <h4>Implementation</h4>
+                                <p>We deploy, train, and launch your complete digital ecosystem.</p>
+                            </div>
+                        </div>
+                        <div class="apply-step">
+                            <div class="apply-step-num">4</div>
+                            <div class="apply-step-text">
+                                <h4>Ongoing Support</h4>
+                                <p>24/7 monitoring, maintenance, and continuous improvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="text">
+                            <h4>Call Us Directly</h4>
+                            <p>+92 339 899 8930</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="partner-form-card reveal">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 28px;">
+                            <i class="fas fa-paper-plane" style="color: var(--primary); margin-right: 8px;"></i> Partnership Request
+                        </h3>
+                        <form id="partnerForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>School Name *</label>
+                                    <input type="text" placeholder="Enter school name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contact Person *</label>
+                                    <input type="text" placeholder="Full name" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" placeholder="you@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="tel" placeholder="+92 3XX XXXXXXX" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City *</label>
+                                    <input type="text" placeholder="e.g. Hyderabad, Karachi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Number of Students</label>
+                                    <input type="number" placeholder="Approximate count" min="1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Education Level *</label>
+                                <select required>
+                                    <option value="" disabled selected>Select education level</option>
+                                    <option>Elementary School (Grades 1-5)</option>
+                                    <option>Secondary School (Grades 6-10)</option>
+                                    <option>Higher Secondary (Grades 11-12)</option>
+                                    <option>College / University</option>
+                                    <option>Multiple Levels</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Tell us about your requirements, current infrastructure, and goals..." rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                Submit Partnership Request <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="partner-form-card" id="successMessage" style="display:none; text-align:center; padding: 60px 40px;">
+                        <div style="width:100px;height:100px;background:rgba(34,197,94,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
+                            <i class="fas fa-check-circle" style="font-size:2.5rem;color:#22c55e;"></i>
+                        </div>
+                        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--dark);margin-bottom:12px;">Request Submitted</h3>
+                        <p style="color:var(--gray);font-size:1rem;margin-bottom:32px;line-height:1.7;">Thank you for your interest. Our team will contact you within 24 hours to discuss your school's digital transformation.</p>
+                        <a href="index.html" class="btn btn-primary">Back to Home <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Home</a></li>
+                        <li><a href="index.html#about"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> About Us</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Projects</a></li>
+                        <li><a href="index.html#features"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> EduTech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.closest('.partner-form-card').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('partner').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

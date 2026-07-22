@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edutech Solutions - Transforming Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --dark: #0f0d1a;
+            --dark-2: #1a1730;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+            --gradient-2: linear-gradient(135deg, #0f0d1a 0%, #1a1730 100%);
+            --gradient-3: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --gradient-mesh: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #ec4899 50%, #f59e0b 75%, #6366f1 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+            --shadow-glow: 0 0 40px rgba(99,102,241,0.3);
+            --radius: 20px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none;
+        }
+
+        /* NOISE OVERLAY */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
+        }
+
+        /* CUSTOM CURSOR */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-light);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+        }
+        .cursor.hovering {
+            transform: translate(-50%, -50%) scale(2.5);
+            background: rgba(99,102,241,0.1);
+            border-color: var(--accent);
+        }
+
+        /* SCROLL PROGRESS */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            z-index: 10001;
+            transition: width 0.1s linear;
+        }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 52px;
+            height: 52px;
+            background: var(--gradient-1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            cursor: none;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px) rotate(0deg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-glow);
+            border: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            transform: translateY(-4px) rotate(-10deg) scale(1.1);
+            box-shadow: 0 0 60px rgba(99,102,241,0.5);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .navbar.scrolled {
+            background: rgba(15,13,26,0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .logo:hover .logo-icon {
+            transform: scale(1.08) rotate(-5deg);
+            box-shadow: 0 0 30px rgba(99,102,241,0.4);
+        }
+        .logo:hover .logo-icon::before { opacity: 1; }
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            font-size: 0.88rem;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .nav-links a:hover {
+            color: var(--white);
+            background: rgba(255,255,255,0.06);
+        }
+        .nav-links a:hover::after { width: 60%; }
+        .nav-cta {
+            background: var(--gradient-1) !important;
+            color: var(--white) !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            box-shadow: 0 4px 20px rgba(99,102,241,0.4) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .nav-cta:hover::before { opacity: 1; }
+        .nav-cta:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 30px rgba(99,102,241,0.5) !important;
+        }
+        .nav-cta::after { display: none !important; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: none;
+            padding: 8px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--dark);
+            overflow: hidden;
+        }
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            animation: heroGlow 8s ease-in-out infinite;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            animation: heroGlow 10s ease-in-out infinite reverse;
+        }
+        @keyframes heroGlow {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-40px) scale(1.1); opacity: 1; }
+        }
+        .hero .container {
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding-top: 100px;
+        }
+        .hero-content { opacity: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(99,102,241,0.12);
+            border: 1px solid rgba(99,102,241,0.2);
+            color: var(--accent-light);
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            animation: fadeSlideIn 0.8s ease 0.2s both;
+        }
+        .hero-badge i { font-size: 0.7rem; animation: pulse 2s ease infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.08;
+            margin-bottom: 28px;
+            animation: fadeSlideIn 0.8s ease 0.4s both;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-mesh);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hero-typing {
+            display: inline-block;
+            min-height: 1.6em;
+        }
+        .hero-typing .typed-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        .typed-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 2px;
+            animation: blink 0.7s step-end infinite;
+            vertical-align: text-bottom;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .hero p {
+            font-size: 1.12rem;
+            color: var(--gray-light);
+            max-width: 520px;
+            margin-bottom: 44px;
+            line-height: 1.85;
+            animation: fadeSlideIn 0.8s ease 0.6s both;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            animation: fadeSlideIn 0.8s ease 0.8s both;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn-primary {
+            background: var(--gradient-1);
+            color: var(--white);
+            box-shadow: 0 4px 25px rgba(99,102,241,0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(99,102,241,0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-4px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            animation: fadeSlideIn 0.8s ease 1s both;
+        }
+        .stat h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat p {
+            font-size: 0.78rem;
+            color: var(--gray-light);
+            margin-bottom: 0;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO VISUAL */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeSlideIn 1s ease 0.6s both;
+        }
+        .hero-card {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 44px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: var(--gradient-1);
+            border-radius: 28px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .hero-card:hover::before { opacity: 0.3; }
+        .hero-card:hover { transform: translateY(-8px); }
+        .hero-card-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 30px rgba(99,102,241,0.3);
+        }
+        .hero-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .hero-card p { color: var(--gray-light); font-size: 0.92rem; margin-bottom: 28px; }
+        .hero-card-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .hero-card-features li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.88rem;
+        }
+        .hero-card-features li i {
+            color: var(--accent-light);
+            font-size: 0.7rem;
+            background: rgba(245,158,11,0.12);
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 16px 22px;
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: var(--white);
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .floating-element i { font-size: 1.2rem; }
+        .floating-1 { top: 10px; right: -10px; animation: floatA 6s ease-in-out infinite; }
+        .floating-2 { bottom: 30px; left: -20px; animation: floatA 7s ease-in-out 1s infinite; }
+        .floating-3 { top: 50%; right: -40px; animation: floatA 8s ease-in-out 2s infinite; }
+        @keyframes floatA {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-12px) rotate(1deg); }
+            66% { transform: translateY(8px) rotate(-1deg); }
+        }
+
+        /* MORPHING BLOBS */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: morphBlob 12s ease-in-out infinite;
+        }
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: var(--primary);
+            top: -200px; right: -100px;
+            animation-delay: 0s;
+        }
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: #ec4899;
+            bottom: -150px; left: -100px;
+            animation-delay: 4s;
+        }
+        .blob-3 {
+            width: 300px; height: 300px;
+            background: var(--accent);
+            top: 50%; left: 50%;
+            animation-delay: 8s;
+        }
+        @keyframes morphBlob {
+            0%, 100% { border-radius: 50% 40% 60% 50% / 50% 60% 40% 50%; transform: translate(0, 0) rotate(0deg); }
+            25% { border-radius: 40% 60% 50% 50% / 60% 50% 50% 40%; transform: translate(30px, -30px) rotate(90deg); }
+            50% { border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%; transform: translate(-20px, 20px) rotate(180deg); }
+            75% { border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; transform: translate(20px, 10px) rotate(270deg); }
+        }
+
+        /* SECTION STYLES */
+        section { padding: 120px 0; position: relative; }
+        .section-header { text-align: center; margin-bottom: 72px; }
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99,102,241,0.1);
+            color: var(--primary-light);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(99,102,241,0.15);
+        }
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+        .section-header h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-header p {
+            color: var(--gray-light);
+            font-size: 1.08rem;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* ABOUT */
+        .about { background: var(--dark-2); overflow: hidden; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .about-visual { position: relative; }
+        .about-image-main {
+            width: 100%;
+            height: 480px;
+            background: var(--gradient-1);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image-main::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .about-image-main i {
+            font-size: 7rem;
+            color: rgba(255,255,255,0.12);
+            position: relative;
+            z-index: 1;
+        }
+        .about-image-overlay {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--dark-2);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 28px 36px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            backdrop-filter: blur(20px);
+        }
+        .about-image-overlay .icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(245,158,11,0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        .about-image-overlay .text h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+        .about-image-overlay .text p { font-size: 0.82rem; color: var(--gray-light); }
+
+        .about-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+        .about-content h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .about-content > p {
+            color: var(--gray-light);
+            font-size: 1.02rem;
+            margin-bottom: 36px;
+            line-height: 1.85;
+        }
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 40px;
+        }
+        .value-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 22px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gradient-1);
+            transition: height 0.4s ease;
+            border-radius: 0 0 3px 3px;
+        }
+        .value-item:hover::before { height: 100%; }
+        .value-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(99,102,241,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .value-item i {
+            color: var(--primary-light);
+            font-size: 1.15rem;
+            margin-top: 2px;
+        }
+        .value-item h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+        .value-item p { font-size: 0.82rem; color: var(--gray-light); line-height: 1.6; }
+
+        /* SERVICES */
+        .services { background: var(--dark); overflow: hidden; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.08), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .service-card:hover::after { opacity: 1; }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-color: rgba(99,102,241,0.2);
+            background: rgba(255,255,255,0.05);
+        }
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .service-card:hover .service-icon { transform: scale(1.12) rotate(-5deg); }
+        .si-blue { background: rgba(99,102,241,0.12); color: var(--primary-light); }
+        .si-purple { background: rgba(139,92,246,0.12); color: #a78bfa; }
+        .si-green { background: rgba(16,185,129,0.12); color: #34d399; }
+        .si-orange { background: rgba(245,158,11,0.12); color: var(--accent-light); }
+        .si-red { background: rgba(239,68,68,0.12); color: #f87171; }
+        .si-teal { background: rgba(20,184,166,0.12); color: #2dd4bf; }
+        .si-pink { background: rgba(236,72,153,0.12); color: #f472b6; }
+
+        .service-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .service-card p {
+            color: var(--gray-light);
+            font-size: 0.88rem;
+            margin-bottom: 24px;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .service-link i { transition: transform 0.3s ease; }
+        .service-card:hover .service-link i { transform: translateX(6px); }
+
+        /* FEATURES */
+        .features {
+            background: var(--dark-2);
+            position: relative;
+            overflow: hidden;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(99,102,241,0.1), transparent 30%);
+            animation: rotateGlow 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: var(--dark-2);
+            border-radius: calc(var(--radius) - 1px);
+            z-index: 0;
+        }
+        .feature-card > * { position: relative; z-index: 1; }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99,102,241,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .feature-card .f-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(99,102,241,0.12);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .feature-card .f-icon i {
+            font-size: 1.4rem;
+            color: var(--primary-light);
+        }
+        .feature-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: var(--gray-light);
+            font-size: 0.88rem;
+            line-height: 1.75;
+        }
+
+        /* STATS SECTION */
+        .stats-section { background: var(--dark); padding: 80px 0; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 40px 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .stat-card:hover::before { opacity: 0.08; }
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(99,102,241,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        .stat-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+        .stat-card p {
+            color: var(--gray-light);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA */
+        .cta-section { padding: 100px 0; background: var(--dark-2); }
+        .cta-box {
+            background: var(--gradient-1);
+            border-radius: 32px;
+            padding: 80px 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-box h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-box p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            max-width: 620px;
+            margin: 0 auto 44px;
+            position: relative;
+            z-index: 2;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .btn-white {
+            background: var(--white);
+            color: var(--primary-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .btn-white:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+        }
+        .btn-ghost {
+            background: rgba(255,255,255,0.12);
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+        }
+
+        /* CONTACT */
+        .contact { background: var(--dark); overflow: hidden; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+        }
+        .contact-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 18px;
+        }
+        .contact-info > p {
+            color: var(--gray-light);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            transition: all 0.4s ease;
+        }
+        .contact-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(99,102,241,0.2);
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .contact-item .icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(99,102,241,0.12);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+        .contact-item .text h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .contact-item .text p { font-size: 0.85rem; color: var(--gray-light); }
+
+        .contact-form {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 44px;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(20px);
+        }
+        .contact-form h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 32px;
+        }
+        .form-group { margin-bottom: 22px; }
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--white);
+            background: rgba(255,255,255,0.04);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--gray); }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-light);
+            background: rgba(99,102,241,0.06);
+            box-shadow: 0 0 0 4px rgba(99,102,241,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 130px; }
+        .form-group select option { background: var(--dark); color: var(--white); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-1);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: none;
+            transition: all 0.4s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-submit:hover::before { opacity: 1; }
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(99,102,241,0.4);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            padding: 80px 0 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 52px;
+            padding-bottom: 52px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-brand .logo-text {
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 18px;
+        }
+        .footer-brand p { font-size: 0.88rem; line-height: 1.75; margin-bottom: 24px; }
+        .social-links { display: flex; gap: 12px; }
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background: var(--gradient-1);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.3);
+            border-color: transparent;
+        }
+        .footer h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-links a:hover {
+            color: var(--primary-light);
+            transform: translateX(6px);
+        }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .footer-contact-item i {
+            color: var(--primary-light);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .footer-contact-item p { font-size: 0.88rem; }
+        .footer-bottom {
+            padding: 28px 0;
+            text-align: center;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 44px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-visual { display: none; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .services-grid, .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .cursor, .cursor-dot { display: none; }
+            body { cursor: auto; }
+            .btn, .btn-submit, .hamburger, .back-to-top, .service-card, .nav-cta { cursor: pointer; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 82%; max-width: 380px;
+                height: 100vh; background: rgba(15,13,26,0.98); flex-direction: column;
+                padding: 100px 32px 32px; box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+                transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); gap: 4px;
+                backdrop-filter: blur(20px);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: rgba(255,255,255,0.7) !important; padding: 14px 18px; width: 100%; border-radius: var(--radius-sm); }
+            .nav-links a:hover { background: rgba(99,102,241,0.1) !important; color: var(--white) !important; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero-stats { gap: 28px; flex-wrap: wrap; }
+            .stat h3 { font-size: 1.8rem; }
+            .section-header h2 { font-size: 2.2rem; }
+            .services-grid, .features-grid { grid-template-columns: 1fr; }
+            .about-values { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .cta-box { padding: 52px 28px; }
+            .cta-box h2 { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">E</div>
+                <span class="logo-text">Edutech Solutions</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="apply.html" class="nav-cta"><i class="fas fa-laptop"></i> Online Admission</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <canvas id="particles-canvas"></canvas>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    Transforming Education Since 2020
+                </div>
+                <h1>Empowering <span class="highlight" id="heroHighlight">Schools</span> for a Smarter Tomorrow</h1>
+                <div class="hero-typing">
+                    <span class="typed-text" id="typedText"></span><span class="typed-cursor">|</span>
+                </div>
+                <p style="margin-top: 20px;">With a mission to infuse 21st-century skills into every classroom, Edutech Solutions harmonizes cutting-edge technology with proven pedagogical practices to create an ecosystem where learning thrives and creativity blooms.</p>
+                <div class="hero-buttons">
+                    <a href="apply.html" class="btn btn-primary">
+                        Explore Programs <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="btn btn-outline">
+                        <i class="fas fa-play-circle"></i> Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Schools Served</p>
+                    </div>
+                    <div class="stat">
+                        <h3>10K+</h3>
+                        <p>Students Impacted</p>
+                    </div>
+                    <div class="stat">
+                        <h3>100%</h3>
+                        <p>Academic Success</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>BS Degree Programs</h3>
+                    <p>4-Year programs empowering future leaders with modern education and 21st-century skills.</p>
+                    <ul class="hero-card-features">
+                        <li><i class="fas fa-check"></i> HEC Recognized Degrees</li>
+                        <li><i class="fas fa-check"></i> Industry-Relevant Curriculum</li>
+                        <li><i class="fas fa-check"></i> Expert Faculty & Mentors</li>
+                        <li><i class="fas fa-check"></i> Career Development Support</li>
+                    </ul>
+                </div>
+                <div class="floating-element floating-1">
+                    <i class="fas fa-chalkboard-teacher" style="color: var(--accent-light);"></i> Teacher Training
+                </div>
+                <div class="floating-element floating-2">
+                    <i class="fas fa-laptop-code" style="color: var(--primary-light);"></i> Digital Solutions
+                </div>
+                <div class="floating-element floating-3">
+                    <i class="fas fa-certificate" style="color: #34d399;"></i> Certified Programs
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-image-main">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="about-image-overlay">
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
+                        <div class="text">
+                            <h4>Excellence</h4>
+                            <p>Educational Innovation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="section-tag"><i class="fas fa-info-circle"></i> About Us</div>
+                    <h2>Revolutionizing <span class="highlight">Education</span> in Pakistan</h2>
+                    <p>Edutech Solutions Pakistan stands as a beacon of transformation in the educational landscape, heralding a new era defined by innovation, integration, and impact. Rooted in a visionary commitment to academic excellence, we are reshaping how education is delivered.</p>
+                    <div class="about-values">
+                        <div class="value-item" data-aos="zoom-in" data-aos-delay="300">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4>Our Vision</h4>
+                                <p>To revolutionize education by empowering schools with innovative tools</p>
+                            </div>
+                        </div>
+                        <div class="value-item" data-aos="zoom-in" data-aos-delay="400">
+                            <i class="fas fa-bullseye"></i>
+                            <div>
+                                <h4>Our Mission</h4>
+                                <p>To elevate education quality with cutting-edge teacher training</p>
+                            </div>
+                        </div>
+                        <div class="value-item" data-aos="zoom-in" data-aos-delay="500">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Our Slogan</h4>
+                                <p>From empowered schools to empowered generations</p>
+                            </div>
+                        </div>
+                        <div class="value-item" data-aos="zoom-in" data-aos-delay="600">
+                            <i class="fas fa-rocket"></i>
+                            <div>
+                                <h4>Our Impact</h4>
+                                <p>21st-century skills in every classroom across Pakistan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">
+                        Discover Our Story <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+                    <h3>500+</h3>
+                    <p>Schools Partnered</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>10,000+</h3>
+                    <p>Students Empowered</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>200+</h3>
+                    <p>Expert Trainers</p>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>50+</h3>
+                    <p>Cities Covered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="projects">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag"><i class="fas fa-th-large"></i> Our Projects</div>
+                <h2>Comprehensive <span class="highlight">Education</span> Solutions</h2>
+                <p>End-to-end solutions transforming institutions through innovation, training, and technology.</p>
+            </div>
+            <div class="services-grid">
+                <a href="apply.html" class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon si-blue"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Bachelor's Degree Programs</h3>
+                    <p>BS 4-Year programs empowering future leaders with modern education and industry-relevant skills.</p>
+                    <span class="service-link">Apply Now <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="edu-tr.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon si-purple"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Training & Development</h3>
+                    <p>Professional development programs designed for educators and institutional growth.</p>
+                    <span class="service-link">Learn More <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="edu-mn.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon si-green"><i class="fas fa-child"></i></div>
+                    <h3>Montessori School</h3>
+                    <p>Early childhood education excellence with international standards and certified programs.</p>
+                    <span class="service-link">Explore <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="edu-sc.html" class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon si-orange"><i class="fas fa-school"></i></div>
+                    <h3>School & College</h3>
+                    <p>Comprehensive education from elementary to higher secondary levels.</p>
+                    <span class="service-link">Discover <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="edu-pub.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon si-red"><i class="fas fa-book-open"></i></div>
+                    <h3>Digital Publications</h3>
+                    <p>Innovative curriculum solutions and digital publications for modern classrooms.</p>
+                    <span class="service-link">View All <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="swhouse.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon si-teal"><i class="fas fa-code"></i></div>
+                    <h3>Software House</h3>
+                    <p>Custom online and offline software development for educational institutions.</p>
+                    <span class="service-link">Our Solutions <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="edu-aca.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon si-pink"><i class="fas fa-laptop"></i></div>
+                    <h3>Edutech Academy</h3>
+                    <p>Unified ecosystem for all learning courses and professional development programs.</p>
+                    <span class="service-link">Join Academy <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="blob blob-1" style="opacity: 0.08;"></div>
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag"><i class="fas fa-star"></i> Why Choose Us</div>
+                <h2>Powerful Features for <span class="highlight">Modern</span> Education</h2>
+                <p>Comprehensive solutions that ensure no learner is left behind and no educator stands unempowered.</p>
+            </div>
+            <div class="features-grid">
+                <a href="#" class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="f-icon"><i class="fas fa-video"></i></div>
+                    <h3>Online Classes</h3>
+                    <p>Seamless integration with Jitsi and BigBlueButton for interactive virtual learning experiences.</p>
+                </a>
+                <a href="our-partners.html" class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="f-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Our Partners</h3>
+                    <p>Collaborating with industry leaders and educational organizations worldwide.</p>
+                </a>
+                <a href="our-team.html" class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="f-icon"><i class="fas fa-user-tie"></i></div>
+                    <h3>Teacher Trainers</h3>
+                    <p>Expert profiles for lesson planning, student tracking, and performance analytics.</p>
+                </a>
+                <a href="our-team.html" class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="f-icon"><i class="fas fa-users-cog"></i></div>
+                    <h3>Our Team</h3>
+                    <p>Experienced educators and tech experts dedicated to transforming education.</p>
+                </a>
+                <a href="our-programs.html" class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="f-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Our Programs</h3>
+                    <p>Customized programs for different school levels with measurable outcomes.</p>
+                </a>
+                <a href="edu-mn.html" class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="f-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>ECE Certifications</h3>
+                    <p>Accredited Early Childhood Education certifications for teachers and trainers.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box" data-aos="zoom-in" data-aos-duration="800">
+                <h2>Ready to Transform Your Institution?</h2>
+                <p>Join thousands of institutions that trust Edutech Solutions for their educational transformation journey.</p>
+                <div class="cta-buttons">
+                    <a href="apply.html" class="btn btn-white">
+                        Apply Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag"><i class="fas fa-envelope"></i> Get In Touch</div>
+                <h2>Let's Start a <span class="highlight">Conversation</span></h2>
+                <p>Ready to transform your educational institution? Reach out to us today.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
+                    <h3>Contact Information</h3>
+                    <p>We'd love to hear from you. Get in touch and let's discuss how we can help transform your institution.</p>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="text">
+                                <h4>Phone</h4>
+                                <p>+92 339 899 8930</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-envelope"></i></div>
+                            <div class="text">
+                                <h4>Email</h4>
+                                <p>info@edutechsolutionpk.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="text">
+                                <h4>Location</h4>
+                                <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon"><i class="fas fa-clock"></i></div>
+                            <div class="text">
+                                <h4>Working Hours</h4>
+                                <p>9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select>
+                                <option>General Inquiry</option>
+                                <option>Admission Information</option>
+                                <option>Training Programs</option>
+                                <option>Software Solutions</option>
+                                <option>Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Send Message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo-text">Edutech Solutions</span>
+                    <p>Transforming education through innovation. Complete end-to-end solution for your educational institute, empowering schools and generations across Pakistan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> About Us</a></li>
+                        <li><a href="#projects"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Projects</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Features</a></li>
+                        <li><a href="career.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="apply.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> BS Degree Programs</a></li>
+                        <li><a href="edu-tr.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Teacher Training</a></li>
+                        <li><a href="edu-mn.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Montessori School</a></li>
+                        <li><a href="edu-pub.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Digital Publications</a></li>
+                        <li><a href="edu-aca.html"><i class="fas fa-chevron-right" style="font-size:0.6rem;"></i> Edutech Academy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+92 339 899 8930</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@edutechsolutionpk.com</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>9:00 AM - 6:00 PM</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>B#88, Qasimabad Phase 1, Hyderabad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Edutech Solutions. All rights reserved. | Empowering Education Through Innovation
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+        /* CUSTOM CURSOR */
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursorDot');
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.12;
+            cursorY += (mouseY - cursorY) * 0.12;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .service-card, .feature-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        /* SCROLL PROGRESS */
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        });
+
+        /* BACK TO TOP */
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* NAVBAR */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        /* HAMBURGER */
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        /* PARTICLES */
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(129, 140, 248, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+        function connectParticles() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.08 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        /* TYPING EFFECT */
+        const typingWords = ['Schools', 'Students', 'Teachers', 'Futures', 'Learning'];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
+        const typedEl = document.getElementById('typedText');
+        const heroHighlight = document.getElementById('heroHighlight');
+
+        function typeEffect() {
+            const currentWord = typingWords[wordIndex];
+            if (isDeleting) {
+                charIndex--;
+                typedEl.textContent = currentWord.substring(0, charIndex);
+            } else {
+                charIndex++;
+                typedEl.textContent = currentWord.substring(0, charIndex);
+                heroHighlight.textContent = currentWord.substring(0, charIndex);
+            }
+            let delay = isDeleting ? 60 : 120;
+            if (!isDeleting && charIndex === currentWord.length) {
+                delay = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % typingWords.length;
+                delay = 400;
+            }
+            setTimeout(typeEffect, delay);
+        }
+        typeEffect();
+
+        /* COUNTER ANIMATION */
+        function animateCounters() {
+            document.querySelectorAll('.stat h3').forEach(counter => {
+                const text = counter.textContent;
+                const match = text.match(/(\d+)/);
+                if (!match) return;
+                const target = parseInt(match[0]);
+                const suffix = text.replace(match[0], '');
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = text;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + suffix;
+                    }
+                }, 30);
+            });
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) heroObserver.observe(heroStats);
+
+        /* CARD GLOW EFFECT */
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+    </script>
+</body>
+</html>
