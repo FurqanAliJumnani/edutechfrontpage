@@ -967,6 +967,155 @@
             line-height: 1.75;
         }
 
+        /* CAMPUS TOUR */
+        .campus-tour { background: var(--dark-2); padding: 120px 0; overflow: hidden; position: relative; }
+        .campus-tour .blob { opacity: 0.06; }
+        .campus-tour .container { position: relative; z-index: 2; }
+        .campus-video-wrapper {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16/9;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+            cursor: none;
+        }
+        .campus-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .campus-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15,13,26,0.3) 0%, rgba(15,13,26,0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        .campus-video-overlay.hidden { opacity: 0; pointer-events: none; }
+        .play-btn {
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: playPulse 2s ease-in-out infinite;
+        }
+        .play-btn::after {
+            content: '';
+            position: absolute;
+            inset: -24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 50%;
+            animation: playPulse 2s ease-in-out 0.5s infinite;
+        }
+        @keyframes playPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        .play-btn:hover {
+            background: var(--gradient-1);
+            border-color: transparent;
+            transform: scale(1.15);
+            box-shadow: 0 0 50px rgba(99,102,241,0.5);
+        }
+        .play-btn i { margin-left: 4px; }
+        .campus-video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 28px;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .campus-video-wrapper:hover .campus-video-controls { opacity: 1; }
+        .campus-video-controls button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: none;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        .campus-video-controls button:hover { color: var(--primary-light); }
+        .video-progress {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        .video-time {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.8);
+            font-variant-numeric: tabular-nums;
+            min-width: 80px;
+            text-align: right;
+        }
+        .campus-badge {
+            position: absolute;
+            top: 28px;
+            left: 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 4;
+            letter-spacing: 0.5px;
+        }
+        .campus-badge i { color: var(--accent-light); font-size: 0.75rem; animation: pulse 2s ease infinite; }
+
+        @media (max-width: 768px) {
+            .campus-video-wrapper { border-radius: 16px; }
+            .play-btn { width: 70px; height: 70px; font-size: 1.5rem; }
+            .campus-video-controls { padding: 14px 18px; }
+        }
+
         /* STATS SECTION */
         .stats-section { background: var(--dark); padding: 80px 0; }
         .stats-grid {
@@ -1512,6 +1661,35 @@
         </div>
     </section>
 
+    <section class="campus-tour">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag"><i class="fas fa-video"></i> Campus Tour</div>
+                <h2>Explore Our <span class="highlight">Campus</span></h2>
+                <p>Take a virtual walk through our state-of-the-art facilities and see where learning comes alive.</p>
+            </div>
+            <div class="campus-video-wrapper" data-aos="zoom-in" data-aos-duration="1000">
+                <video id="campusVideo" preload="metadata" poster="">
+                    <source src="WhatsApp Video 2026-07-22 at 2.44.06 PM.mp4" type="video/mp4">
+                </video>
+                <div class="campus-badge"><i class="fas fa-circle"></i> Campus Tour 2026</div>
+                <div class="campus-video-overlay" id="videoOverlay">
+                    <button class="play-btn" id="playBtn"><i class="fas fa-play"></i></button>
+                </div>
+                <div class="campus-video-controls" id="videoControls">
+                    <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+                    <div class="video-progress" id="videoProgress">
+                        <div class="video-progress-bar" id="videoProgressBar"></div>
+                    </div>
+                    <span class="video-time" id="videoTime">0:00 / 0:00</span>
+                    <button id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
@@ -1986,6 +2164,60 @@
         }, { threshold: 0.5 });
         const heroStats = document.querySelector('.hero-stats');
         if (heroStats) heroObserver.observe(heroStats);
+
+        /* CAMPUS VIDEO PLAYER */
+        const campusVideo = document.getElementById('campusVideo');
+        const videoOverlay = document.getElementById('videoOverlay');
+        const playBtn = document.getElementById('playBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const videoProgress = document.getElementById('videoProgress');
+        const videoProgressBar = document.getElementById('videoProgressBar');
+        const videoTime = document.getElementById('videoTime');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const videoControls = document.getElementById('videoControls');
+
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
+        function togglePlay() {
+            if (campusVideo.paused) {
+                campusVideo.play();
+                videoOverlay.classList.add('hidden');
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                campusVideo.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        playBtn.addEventListener('click', togglePlay);
+        playPauseBtn.addEventListener('click', togglePlay);
+        campusVideo.addEventListener('click', togglePlay);
+
+        campusVideo.addEventListener('timeupdate', () => {
+            const pct = (campusVideo.currentTime / campusVideo.duration) * 100;
+            videoProgressBar.style.width = pct + '%';
+            videoTime.textContent = formatTime(campusVideo.currentTime) + ' / ' + formatTime(campusVideo.duration);
+        });
+
+        campusVideo.addEventListener('ended', () => {
+            videoOverlay.classList.remove('hidden');
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+
+        videoProgress.addEventListener('click', (e) => {
+            const rect = videoProgress.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            campusVideo.currentTime = pct * campusVideo.duration;
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (campusVideo.requestFullscreen) campusVideo.requestFullscreen();
+            else if (campusVideo.webkitRequestFullscreen) campusVideo.webkitRequestFullscreen();
+        });
 
         /* CARD GLOW EFFECT */
         document.querySelectorAll('.service-card').forEach(card => {
