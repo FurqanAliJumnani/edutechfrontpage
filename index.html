@@ -1528,21 +1528,14 @@
         }
         .preloader-content { text-align: center; }
         .preloader-logo { margin-bottom: 28px; }
-        .preloader-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1a56db, #2563eb);
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 2.2rem;
-            font-weight: 800;
-            font-family: 'Space Grotesk', sans-serif;
+        .preloader-logo-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             margin: 0 auto;
+            display: block;
             animation: preloaderPulse 1.5s ease-in-out infinite;
-            box-shadow: 0 10px 40px rgba(26,86,219,0.4);
+            filter: drop-shadow(0 10px 30px rgba(26,86,219,0.4));
         }
         @keyframes preloaderPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 10px 40px rgba(26,86,219,0.4); }
@@ -1925,7 +1918,7 @@
     <div class="preloader" id="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">
-                <div class="preloader-icon">E</div>
+                <img src="logo.jpeg" alt="Edutech Solutions" class="preloader-logo-img">
             </div>
             <div class="preloader-text">Edutech <span><style font-color: yellow; >Solutions</style></span></div>
             <div class="preloader-bar-track">
