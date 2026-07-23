@@ -53,6 +53,7 @@ body {
     font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem;
     font-weight: 700; color: var(--dark);
 }
+.logo-text .yellow { color: #eab308; }
 .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
 .nav-links a {
     text-decoration: none; color: var(--dark); font-weight: 500;
