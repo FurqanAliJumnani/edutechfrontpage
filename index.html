@@ -1511,6 +1511,93 @@
             .footer-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
         }
+        /* PRELOADER */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: #0b1d3a;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-content { text-align: center; }
+        .preloader-logo { margin-bottom: 28px; }
+        .preloader-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a56db, #2563eb);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 auto;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(26,86,219,0.4);
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 40px rgba(26,86,219,0.4); }
+            50% { transform: scale(1.08); box-shadow: 0 15px 50px rgba(26,86,219,0.6); }
+        }
+        .preloader-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 32px;
+        }
+        .preloader-text span { color: #eab308; }
+        .preloader-bar-track {
+            width: 240px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            margin: 0 auto 14px;
+            overflow: hidden;
+        }
+        .preloader-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1a56db, #2563eb, #eab308);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .preloader-percent {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+            margin-bottom: 24px;
+            font-variant-numeric: tabular-nums;
+        }
+        .preloader-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        .preloader-dots span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: preloaderDot 1.4s ease-in-out infinite;
+        }
+        .preloader-dots span:nth-child(1) { animation-delay: 0s; }
+        .preloader-dots span:nth-child(2) { animation-delay: 0.2s; background: #2563eb; }
+        .preloader-dots span:nth-child(3) { animation-delay: 0.4s; background: #eab308; }
+        @keyframes preloaderDot {
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(-10px); opacity: 1; }
+        }
+
         /* AI CHATBOT */
         .chat-fab {
             position: fixed;
@@ -1833,6 +1920,23 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <div class="preloader-icon">E</div>
+            </div>
+            <div class="preloader-text">Edutech <span>Solutions</span></div>
+            <div class="preloader-bar-track">
+                <div class="preloader-bar" id="preloaderBar"></div>
+            </div>
+            <div class="preloader-percent" id="preloaderPercent">0%</div>
+            <div class="preloader-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
 
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
@@ -2315,6 +2419,53 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+        /* PRELOADER */
+        const preloader = document.getElementById('preloader');
+        const preloaderBar = document.getElementById('preloaderBar');
+        const preloaderPercent = document.getElementById('preloaderPercent');
+        let loadProgress = 0;
+
+        function updatePreloader(target) {
+            const step = () => {
+                if (loadProgress < target) {
+                    loadProgress += Math.random() * 8 + 2;
+                    if (loadProgress > target) loadProgress = target;
+                    preloaderBar.style.width = Math.min(loadProgress, 100) + '%';
+                    preloaderPercent.textContent = Math.floor(Math.min(loadProgress, 100)) + '%';
+                    if (loadProgress < target) requestAnimationFrame(step);
+                }
+            };
+            step();
+        }
+
+        updatePreloader(30);
+
+        window.addEventListener('load', () => {
+            updatePreloader(100);
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 600);
+        });
+
+        setTimeout(() => {
+            updatePreloader(85);
+        }, 1500);
+
+        setTimeout(() => {
+            if (loadProgress < 100) {
+                preloaderBar.style.width = '100%';
+                preloaderPercent.textContent = '100%';
+                loadProgress = 100;
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 400);
+            }
+        }, 5000);
+
+        document.body.style.overflow = 'hidden';
 
         /* CUSTOM CURSOR */
         const cursor = document.getElementById('cursor');
