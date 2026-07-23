@@ -2413,52 +2413,122 @@
     <script>
         AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
 
-        /* PRELOADER */
+        /* PRELOADER - Smart Loading */
         const preloader = document.getElementById('preloader');
         const preloaderBar = document.getElementById('preloaderBar');
         const preloaderPercent = document.getElementById('preloaderPercent');
         let loadProgress = 0;
+        let preloaderDone = false;
 
-        function updatePreloader(target) {
-            const step = () => {
-                if (loadProgress < target) {
-                    loadProgress += Math.random() * 8 + 2;
-                    if (loadProgress > target) loadProgress = target;
-                    preloaderBar.style.width = Math.min(loadProgress, 100) + '%';
-                    preloaderPercent.textContent = Math.floor(Math.min(loadProgress, 100)) + '%';
-                    if (loadProgress < target) requestAnimationFrame(step);
-                }
-            };
-            step();
+        document.body.style.overflow = 'hidden';
+
+        function setProgress(val) {
+            loadProgress = Math.min(val, 100);
+            preloaderBar.style.width = loadProgress + '%';
+            preloaderPercent.textContent = Math.floor(loadProgress) + '%';
         }
 
-        updatePreloader(30);
-
-        window.addEventListener('load', () => {
-            updatePreloader(100);
+        function hidePreloader() {
+            if (preloaderDone) return;
+            preloaderDone = true;
+            setProgress(100);
             setTimeout(() => {
                 preloader.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            }, 600);
+            }, 500);
+        }
+
+        // Detect connection speed
+        let connectionSpeed = 'fast';
+        if (navigator.connection) {
+            const conn = navigator.connection;
+            if (conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g') connectionSpeed = 'slow';
+            else if (conn.effectiveType === '3g') connectionSpeed = 'medium';
+        }
+
+        // Phase 1: Track all images
+        const allImages = document.querySelectorAll('img');
+        let imagesLoaded = 0;
+        const totalImages = allImages.length || 1;
+
+        function checkImageProgress() {
+            const imgPercent = (imagesLoaded / totalImages) * 30;
+            if (loadProgress < 20 + imgPercent) setProgress(20 + imgPercent);
+            if (imagesLoaded >= totalImages && loadProgress < 50) setProgress(50);
+        }
+
+        allImages.forEach(img => {
+            if (img.complete) {
+                imagesLoaded++;
+            } else {
+                img.addEventListener('load', () => { imagesLoaded++; checkImageProgress(); });
+                img.addEventListener('error', () => { imagesLoaded++; checkImageProgress(); });
+            }
         });
 
-        setTimeout(() => {
-            updatePreloader(85);
-        }, 1500);
+        // Phase 2: Track CSS
+        const allCSS = document.querySelectorAll('link[rel="stylesheet"]');
+        let cssLoaded = 0;
+        const totalCSS = allCSS.length || 1;
 
-        setTimeout(() => {
-            if (loadProgress < 100) {
-                preloaderBar.style.width = '100%';
-                preloaderPercent.textContent = '100%';
-                loadProgress = 100;
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }, 400);
+        allCSS.forEach(link => {
+            if (link.sheet) { cssLoaded++; }
+            else {
+                link.addEventListener('load', () => { cssLoaded++; if (loadProgress < 55) setProgress(55); });
+                link.addEventListener('error', () => { cssLoaded++; });
             }
-        }, 5000);
+        });
 
-        document.body.style.overflow = 'hidden';
+        // Phase 3: Track video
+        const campusVideo = document.getElementById('campusVideo');
+        if (campusVideo) {
+            campusVideo.addEventListener('loadeddata', () => { if (loadProgress < 70) setProgress(70); });
+            campusVideo.addEventListener('canplay', () => { if (loadProgress < 75) setProgress(75); });
+        }
+
+        // Phase 4: Font loading
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => { if (loadProgress < 80) setProgress(80); });
+        }
+
+        // Phase 5: Network-aware timing
+        const minLoadTime = connectionSpeed === 'slow' ? 3000 : connectionSpeed === 'medium' ? 2000 : 1200;
+        const maxLoadTime = connectionSpeed === 'slow' ? 15000 : connectionSpeed === 'medium' ? 10000 : 6000;
+
+        // Initial progress
+        setProgress(5);
+
+        // Smooth progress ticks
+        const tickInterval = setInterval(() => {
+            if (preloaderDone) { clearInterval(tickInterval); return; }
+            if (loadProgress < 90) {
+                setProgress(loadProgress + Math.random() * 3 + 1);
+            }
+            checkImageProgress();
+        }, 200);
+
+        // Minimum wait then check if ready
+        setTimeout(() => {
+            clearInterval(tickInterval);
+            if (loadProgress >= 70) {
+                setProgress(100);
+                hidePreloader();
+            } else {
+                // Still loading, smooth to 100
+                const finalInterval = setInterval(() => {
+                    if (loadProgress >= 100) { clearInterval(finalInterval); hidePreloader(); return; }
+                    setProgress(loadProgress + 2);
+                }, 100);
+            }
+        }, minLoadTime);
+
+        // Absolute maximum timeout - never let user wait forever
+        setTimeout(() => { hidePreloader(); }, maxLoadTime);
+
+        // Also hide when everything is truly loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => { hidePreloader(); }, 400);
+        });
 
         /* CUSTOM CURSOR */
         const cursor = document.getElementById('cursor');
